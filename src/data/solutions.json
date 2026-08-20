@@ -1,0 +1,45 @@
+[
+  {
+    "id": "webs",
+    "tab": "Webs",
+    "title": "Una web preparada para convertir visitas en clientes.",
+    "description": "Diseñamos y desarrollamos webs rápidas, responsive y adaptadas a cada negocio, con una estructura pensada para generar confianza y facilitar el contacto.",
+    "image": "webs"
+  },
+  {
+    "id": "qr-nfc",
+    "tab": "QR + NFC",
+    "title": "Un toque. Una acción inmediata.",
+    "description": "Creamos soluciones QR y NFC para conectar el espacio físico del negocio con reseñas, redes sociales, cartas digitales, promociones o cualquier destino online.",
+    "image": "qr-nfc"
+  },
+  {
+    "id": "reviews",
+    "tab": "Reseñas",
+    "title": "Haz que dejar una reseña sea fácil.",
+    "description": "Reducimos los pasos entre una buena experiencia y una nueva reseña mediante accesos directos a Google y otros canales relevantes.",
+    "image": "reviews"
+  },
+  {
+    "id": "local-seo",
+    "tab": "SEO Local",
+    "title": "Que te encuentren cuando están buscando.",
+    "description": "Optimizamos la presencia local del negocio para mejorar su visibilidad en Google y facilitar que nuevos clientes lo encuentren.",
+    "image": "local-seo"
+  },
+  {
+    "id": "cards",
+    "tab": "Tarjetas",
+    "title": "Toda tu información, en un gesto.",
+    "description": "Tarjetas QR y NFC personalizadas para compartir contacto, redes sociales, reseñas o cualquier enlace relevante.",
+    "image": "cards"
+  },
+  {
+    "id": "upcoming",
+    "tab": "Próximamente",
+    "title": "Seguimos construyendo nuevas formas de conectar.",
+    "description": "Desarrollamos constantemente nuevas herramientas físicas y digitales adaptadas a las necesidades reales de los negocios.",
+    "image": "upcoming",
+    "isUpcoming": true
+  }
+]

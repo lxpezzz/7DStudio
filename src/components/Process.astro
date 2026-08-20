@@ -1,0 +1,168 @@
+---
+const steps = [
+  {
+    num: "01",
+    title: "Hablamos",
+    description: "Entendemos tu negocio, qué necesitas y el objetivo concreto que buscas conseguir con la web o producto.",
+  },
+  {
+    num: "02",
+    title: "Diseñamos",
+    description: "Definimos la estructura, dirección visual y contenido antes de construir la versión final.",
+  },
+  {
+    num: "03",
+    title: "Lanzamos",
+    description: "Construimos, optimizamos rendimiento y responsive, y dejamos todo listo para empezar a funcionar.",
+  },
+];
+---
+
+<section class="process-section" id="proceso">
+  <div class="section-container">
+    <div class="process-canvas">
+      <!-- Section Header -->
+      <div class="process-header">
+        <div class="process-eyebrow">Cómo trabajamos</div>
+        <h2 class="process-h2">De la idea a una web lista para trabajar.</h2>
+      </div>
+
+      <!-- Process Steps Flow -->
+      <div class="process-grid">
+        {steps.map((step) => (
+          <div class="step-col">
+            <div class="step-line-row">
+              <span class="step-num">{step.num}</span>
+              <span class="step-line" aria-hidden="true"></span>
+            </div>
+            <div class="step-body">
+              <h3 class="step-title">{step.title}</h3>
+              <p class="step-desc">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Section Layout */
+  .process-section {
+    width: 100%;
+    position: relative;
+  }
+
+  .process-canvas {
+    width: 100%;
+    background-color: var(--bg-canvas-dark);
+    background-image: radial-gradient(120% 90% at 50% 10%, #151822 0%, #090a0d 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--canvas-radius);
+    padding: clamp(2.25rem, 4.5vw, 4rem) clamp(1.75rem, 4vw, 3.5rem);
+    box-shadow: 0 24px 48px -16px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header */
+  .process-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(2.5rem, 5vw, 4.25rem);
+  }
+
+  .process-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.15rem;
+  }
+
+  .process-eyebrow::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .process-h2 {
+    font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: var(--tracking-tightest);
+    color: var(--text-primary);
+    max-width: 22ch;
+    text-wrap: balance;
+  }
+
+  /* Steps Grid */
+  .process-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .process-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(1.5rem, 3vw, 3.5rem);
+    }
+  }
+
+  /* Step Column */
+  .step-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .step-line-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .step-num {
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+  }
+
+  .step-line {
+    flex: 1;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .step-title {
+    font-size: clamp(1.35rem, 1.8vw, 1.6rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .step-desc {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    font-weight: 400;
+    text-wrap: pretty;
+  }
+</style>

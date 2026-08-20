@@ -1,0 +1,20 @@
+[
+  {
+    "id": "web",
+    "title": "Páginas web que trabajan por tu negocio.",
+    "description": "Diseño y desarrollo web pensado para destacar, generar confianza y convertir visitas en clientes.",
+    "image": "web-demo"
+  },
+  {
+    "id": "expositor",
+    "title": "De una visita a una acción.",
+    "description": "Expositores personalizados con QR y NFC para reseñas, redes sociales y accesos rápidos.",
+    "image": "expositor"
+  },
+  {
+    "id": "tarjetas",
+    "title": "Tu negocio, en una tarjeta.",
+    "description": "Tarjetas QR y NFC personalizadas para compartir contacto, reseñas, redes sociales o cualquier enlace importante.",
+    "image": "tarjetas"
+  }
+]

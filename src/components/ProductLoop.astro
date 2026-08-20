@@ -1,0 +1,501 @@
+---
+import { Image } from "astro:assets";
+import productsData from "../data/products.json";
+
+import webDemoImg from "../assets/products/web-demo.webp";
+import expositorImg from "../assets/products/expositor.webp";
+import tarjetasImg from "../assets/products/tarjetas.webp";
+
+const imagesMap: Record<string, ImageMetadata> = {
+  "web-demo": webDemoImg,
+  expositor: expositorImg,
+  tarjetas: tarjetasImg,
+};
+---
+
+<section class="products-section" id="servicios">
+  <div class="section-container">
+    <div class="product-twin-grid" id="productSalesLoop">
+      <!-- LEFT BLOCK: Compact Editorial Content & Studio CTA -->
+      <div class="editorial-card">
+        <div class="editorial-content-wrap">
+          <div class="editorial-eyebrow">Qué hacemos</div>
+
+          <!-- Dynamic Text Stack -->
+          <div class="editorial-text-stack">
+            {
+              productsData.map((item, index) => (
+                <div
+                  class={`text-slide ${index === 0 ? "is-active" : ""}`}
+                  data-text-index={index}
+                  aria-hidden={index === 0 ? "false" : "true"}
+                >
+                  <h2 class="product-h2">{item.title}</h2>
+                  <p class="product-p">{item.description}</p>
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- Studio CTA Attached Below Description -->
+          <div class="editorial-action">
+            <a href="#contacto" class="editorial-cta-btn">
+              <span>Hablemos</span>
+              <span class="cta-arrow" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M3 8h10M9 4l4 4-4 4"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT BLOCK: Visual Stage with Real Images & Progress Indicators -->
+      <div class="visual-card">
+        <div class="visual-stage">
+          {
+            productsData.map((item, index) => (
+              <div
+                class={`visual-slide ${index === 0 ? "is-active" : ""}`}
+                data-visual-index={index}
+                aria-hidden={index === 0 ? "false" : "true"}
+              >
+                <Image
+                  src={imagesMap[item.image]}
+                  alt={item.title}
+                  class="product-image"
+                  loading="lazy"
+                  width={1200}
+                  height={800}
+                />
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- Bottom Horizontal Progress Indicators (Linear Animated Fill) -->
+        <div
+          class="visual-indicators-pill"
+          role="tablist"
+          aria-label="Selector de producto"
+        >
+          {
+            productsData.map((item, index) => (
+              <button
+                type="button"
+                role="tab"
+                class={`indicator-btn ${index === 0 ? "is-active" : ""}`}
+                data-indicator-index={index}
+                aria-label={`Ver ${item.title}`}
+                aria-selected={index === 0 ? "true" : "false"}
+              >
+                <span class="progress-track" aria-hidden="true">
+                  <span class="progress-fill" />
+                </span>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const loopRoot = document.getElementById("productSalesLoop");
+  if (loopRoot) {
+    const textSlides = loopRoot.querySelectorAll(".text-slide");
+    const visualSlides = loopRoot.querySelectorAll(".visual-slide");
+    const indicatorBtns = loopRoot.querySelectorAll(".indicator-btn");
+
+    let currentIndex = 0;
+    const AUTOPLAY_DURATION = 4500;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    // Inject uniform duration variable
+    loopRoot.style.setProperty("--autoplay-duration", `${AUTOPLAY_DURATION}ms`);
+
+    function setSlide(index: number) {
+      currentIndex = index;
+
+      textSlides.forEach((slide, i) => {
+        const active = i === index;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", String(!active));
+      });
+
+      visualSlides.forEach((slide, i) => {
+        const active = i === index;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", String(!active));
+      });
+
+      indicatorBtns.forEach((btn, i) => {
+        const active = i === index;
+        const fill = btn.querySelector(".progress-fill") as HTMLElement | null;
+
+        btn.classList.remove("is-active");
+        btn.setAttribute("aria-selected", String(active));
+
+        if (fill) {
+          fill.style.animation = "none";
+          void fill.offsetWidth; // Force reflow
+          fill.style.animation = "";
+        }
+
+        if (active) {
+          btn.classList.add("is-active");
+        }
+      });
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentIndex + 1) % textSlides.length;
+      setSlide(nextIndex);
+    }
+
+    // Attach animationend to progress fills for frame-synchronized transitions
+    indicatorBtns.forEach((btn, idx) => {
+      const fill = btn.querySelector(".progress-fill");
+      fill?.addEventListener("animationend", () => {
+        if (btn.classList.contains("is-active") && !prefersReducedMotion) {
+          nextSlide();
+        }
+      });
+
+      // Manual click
+      btn.addEventListener("click", () => {
+        setSlide(idx);
+      });
+    });
+
+    // Pause on hover or focus
+    loopRoot.addEventListener("mouseenter", () =>
+      loopRoot.classList.add("is-paused"),
+    );
+    loopRoot.addEventListener("mouseleave", () =>
+      loopRoot.classList.remove("is-paused"),
+    );
+    loopRoot.addEventListener("focusin", () =>
+      loopRoot.classList.add("is-paused"),
+    );
+    loopRoot.addEventListener("focusout", () =>
+      loopRoot.classList.remove("is-paused"),
+    );
+
+    // Initialize first slide animation
+    setSlide(0);
+  }
+</script>
+
+<style>
+  /* Section Layout */
+  .products-section {
+    width: 100%;
+    position: relative;
+    padding-top: 0;
+  }
+
+  .product-twin-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .product-twin-grid {
+      grid-template-columns: 0.95fr 1.05fr;
+      min-height: 440px;
+      max-height: 480px;
+    }
+  }
+
+  /* Editorial Card */
+  .editorial-card {
+    background-color: var(--bg-canvas-light);
+    border: 1px solid var(--border-light-subtle);
+    border-radius: var(--canvas-radius);
+    padding: clamp(28px, 3.5vw, 42px) clamp(28px, 3.8vw, 46px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.06);
+  }
+
+  .editorial-content-wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .editorial-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--text-light-secondary);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.15rem;
+  }
+
+  .editorial-eyebrow::before {
+    content: "";
+    width: 5.5px;
+    height: 5.5px;
+    border-radius: 50%;
+    background-color: #0e1014;
+    flex-shrink: 0;
+  }
+
+  /* Text Stack */
+  .editorial-text-stack {
+    position: relative;
+    min-height: 125px;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .text-slide {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    opacity: 0;
+    transform: translateY(4px);
+    pointer-events: none;
+    transition:
+      opacity 0.45s var(--ease-default),
+      transform 0.45s var(--ease-default);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+
+  .text-slide.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative;
+  }
+
+  .product-h2 {
+    font-size: clamp(1.5rem, 2.15vw, 1.95rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+    color: #0e1014;
+    max-width: 17ch;
+    text-wrap: balance;
+  }
+
+  .product-p {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--text-light-secondary);
+    max-width: 390px;
+    font-weight: 400;
+    text-wrap: pretty;
+  }
+
+  /* CTA Button */
+  .editorial-action {
+    margin-top: 1.75rem;
+  }
+
+  .editorial-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    height: 46px;
+    padding-left: 1.45rem;
+    padding-right: 0.55rem;
+    border-radius: var(--pill-radius);
+    background: #0e1014;
+    color: #ffffff;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition:
+      transform var(--duration-smooth) var(--ease-default),
+      background-color var(--duration-smooth),
+      box-shadow var(--duration-smooth);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .editorial-cta-btn:hover {
+    background: #242730;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(14, 16, 20, 0.2);
+  }
+
+  .editorial-cta-btn:active {
+    transform: scale(0.98);
+  }
+
+  .cta-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.14);
+    color: #ffffff;
+    transition: transform var(--duration-quick) var(--ease-default);
+  }
+
+  .editorial-cta-btn:hover .cta-arrow {
+    transform: translateX(2px);
+  }
+
+  /* Visual Card Stage */
+  .visual-card {
+    background-color: #0b0b0b;
+    background-image: radial-gradient(120% 90% at 70% 15%, #252525 0%, #131313 55%, #0a0a0a 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--canvas-radius);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 2vw, 1.5rem);
+    min-height: 340px;
+    box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (min-width: 1024px) {
+    .visual-card {
+      min-height: auto;
+    }
+  }
+
+  .visual-stage {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 12px;
+  }
+
+  .visual-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: scale(0.985) translateY(4px);
+    pointer-events: none;
+    transition:
+      opacity 0.45s var(--ease-default),
+      transform 0.45s var(--ease-default);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: calc(var(--canvas-radius) - 6px);
+    overflow: hidden;
+  }
+
+  .visual-slide.is-active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+    z-index: 2;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    display: block;
+    user-select: none;
+  }
+
+  /* Progress Indicators */
+  .visual-indicators-pill {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: var(--pill-radius);
+    padding: 3px 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .indicator-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 3px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    touch-action: manipulation;
+  }
+
+  .progress-track {
+    width: 32px;
+    height: 3.5px;
+    border-radius: var(--pill-radius);
+    background-color: rgba(255, 255, 255, 0.22);
+    position: relative;
+    overflow: hidden;
+    transition: background-color var(--duration-quick);
+  }
+
+  .indicator-btn:hover .progress-track {
+    background-color: rgba(255, 255, 255, 0.35);
+  }
+
+  .progress-fill {
+    position: absolute;
+    inset: 0;
+    background-color: #ffffff;
+    border-radius: inherit;
+    transform-origin: left center;
+    transform: scaleX(0);
+    will-change: transform;
+  }
+
+  .indicator-btn.is-active .progress-fill {
+    animation: barProgress var(--autoplay-duration, 4500ms) linear forwards;
+  }
+
+  .product-twin-grid.is-paused .indicator-btn.is-active .progress-fill {
+    animation-play-state: paused;
+  }
+
+  @keyframes barProgress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .indicator-btn.is-active .progress-fill {
+      animation: none !important;
+      transform: scaleX(1) !important;
+    }
+  }
+</style>

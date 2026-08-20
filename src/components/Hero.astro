@@ -1,0 +1,303 @@
+---
+import { Image } from "astro:assets";
+import siteData from "../data/site.json";
+import heroDemoImg from "../assets/demos/hero-demo.webp";
+---
+
+<section class="hero-section" id="hero">
+  <div class="canvas-container hero-canvas animate-fade-in">
+    <div class="hero-content">
+      <!-- Eyebrow Pill -->
+      <div class="hero-eyebrow">
+        {siteData.hero.badge}
+      </div>
+
+      <!-- Editorial Typography Split -->
+      <div class="hero-header-grid">
+        <h1 class="hero-title">
+          <span class="title-lead">{siteData.hero.titleLine1}</span>
+          <span class="title-sub">{siteData.hero.titleLine2}</span>
+        </h1>
+
+        <div class="hero-narrative-col">
+          <p class="hero-description">
+            {siteData.hero.description}
+          </p>
+
+          <div class="hero-actions">
+            <a href={siteData.cta.href} class="btn-primary">
+              <span>{siteData.hero.primaryCta}</span>
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 12 12" fill="none">
+                  <path
+                    d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </a>
+
+            <a href="#servicios" class="btn-secondary">
+              <span>{siteData.hero.secondaryCta}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Canvas Bottom Metadata -->
+      <div class="hero-footer-bar">
+        <div class="meta-item">
+          <span class="meta-text">{siteData.hero.metaStatus}</span>
+        </div>
+        <div class="meta-item meta-location">
+          <span>{siteData.hero.metaLocation}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Hero Canvas */
+  .hero-section {
+    width: 100%;
+    position: relative;
+    padding-top: 0;
+  }
+
+  .hero-canvas {
+    min-height: calc(100dvh - (var(--page-inset) * 2));
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--bg-canvas-dark);
+    background-image:
+      radial-gradient(
+        ellipse 900px 480px at 50% 15%,
+        rgba(255, 255, 255, 0.045) 0%,
+        transparent 65%
+      ),
+      radial-gradient(
+        circle at 50% -10%,
+        rgba(38, 42, 54, 0.45) 0%,
+        rgba(15, 17, 22, 0.6) 45%,
+        rgba(9, 10, 13, 0.95) 100%
+      );
+    position: relative;
+    border: 1px solid var(--border-subtle);
+    overflow: hidden;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: var(--container-width);
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+    padding-top: clamp(6.5rem, 11vw, 9.5rem);
+    padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  /* Eyebrow Pill */
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.4rem 0.95rem;
+    border-radius: var(--pill-radius);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    width: fit-content;
+    font-size: var(--text-caption);
+    font-weight: 500;
+    color: var(--text-secondary);
+    letter-spacing: -0.01em;
+    margin-bottom: clamp(1.5rem, 2.5vw, 2.25rem);
+  }
+
+  .hero-eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    flex-shrink: 0;
+  }
+
+  /* Header Grid */
+  .hero-header-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    align-items: end;
+    margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  }
+
+  .hero-title {
+    display: flex;
+    flex-direction: column;
+    font-size: var(--text-h1);
+    font-weight: 600;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tightest);
+    text-wrap: balance;
+  }
+
+  .title-lead {
+    color: rgba(255, 255, 255, 0.48);
+  }
+
+  .title-sub {
+    color: #ffffff;
+  }
+
+  .hero-narrative-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-description {
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--text-secondary);
+    max-width: 44ch;
+    font-weight: 400;
+    text-wrap: pretty;
+  }
+
+  /* Action Buttons */
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 48px;
+    padding-left: 1.35rem;
+    padding-right: 0.55rem;
+    border-radius: var(--pill-radius);
+    background: #ffffff;
+    color: #08080a;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    transition:
+      transform var(--duration-smooth) var(--ease-default),
+      background-color var(--duration-smooth),
+      box-shadow var(--duration-smooth);
+  }
+
+  .btn-primary:hover {
+    background: rgba(255, 255, 255, 0.92);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.12);
+  }
+
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+
+  .btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.08);
+    color: #08080a;
+    transition: transform var(--duration-quick) var(--ease-default);
+  }
+
+  .btn-primary:hover .btn-icon {
+    transform: translate(1px, -1px);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    height: 48px;
+    padding-inline: 1.35rem;
+    border-radius: var(--pill-radius);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-primary);
+    font-size: var(--text-body-sm);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    transition:
+      transform var(--duration-smooth) var(--ease-default),
+      background-color var(--duration-smooth),
+      border-color var(--duration-smooth);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+    transform: translateY(-1px);
+  }
+
+  /* Footer Bar */
+  .hero-footer-bar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border-subtle);
+    font-size: var(--text-caption);
+    color: var(--text-muted);
+    margin-top: auto;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .meta-item::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .meta-location::before {
+    display: none;
+  }
+
+  .meta-text {
+    color: var(--text-secondary);
+  }
+
+  /* Desktop Breakpoint */
+  @media (min-width: 1024px) {
+    .hero-header-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+    }
+
+    .hero-narrative-col {
+      padding-bottom: 0.5rem;
+    }
+  }
+</style>

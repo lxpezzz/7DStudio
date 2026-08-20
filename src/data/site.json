@@ -1,0 +1,37 @@
+{
+  "name": "7DStudio",
+  "title": "7DStudio — Diseño y desarrollo web de alto nivel",
+  "description": "Estudio de diseño y desarrollo web para negocios. Creamos productos digitales a medida, interfaces de alto nivel y experiencias con impacto real.",
+  "nav": [
+    {
+      "label": "Proyectos",
+      "href": "#proyectos"
+    },
+    {
+      "label": "Servicios",
+      "href": "#servicios"
+    },
+    {
+      "label": "Estudio",
+      "href": "#estudio"
+    },
+    {
+      "label": "Estudio",
+      "href": "#estudio"
+    }
+  ],
+  "cta": {
+    "label": "Hablemos",
+    "href": "#contacto"
+  },
+  "hero": {
+    "badge": "Estudio de diseño y desarrollo web",
+    "titleLine1": "Webs hechas",
+    "titleLine2": "para destacar.",
+    "description": "Diseñamos y desarrollamos productos web de alto nivel para marcas y negocios que no aceptan lo convencional.",
+    "primaryCta": "Hablemos",
+    "secondaryCta": "Explorar productos",
+    "metaLocation": "Castellón, Remoto",
+    "metaStatus": "Disponible para nuevos proyectos"
+  }
+}

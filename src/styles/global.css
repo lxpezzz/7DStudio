@@ -1,0 +1,125 @@
+@import './variables.css';
+
+/* Base Setup & Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--bg-page);
+  color: var(--text-light-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--bg-page);
+  color: var(--text-light-primary);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  line-height: var(--leading-relaxed);
+}
+
+::selection {
+  background: rgba(10, 10, 10, 0.12);
+  color: #0a0a0a;
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Accessibility */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/* Layout Shell */
+.page-wrapper {
+  width: 100%;
+  padding: var(--page-inset);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--hero-gap);
+}
+
+.studio-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--section-gap);
+}
+
+.studio-gap {
+  gap: var(--section-gap);
+}
+
+.canvas-container {
+  width: 100%;
+  max-width: var(--container-hero);
+  margin-inline: auto;
+  border-radius: var(--canvas-radius);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-container {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Motion */
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: heroFadeIn 0.85s var(--ease-default) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
