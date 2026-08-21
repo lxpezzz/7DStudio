@@ -31,7 +31,7 @@ Target: < 800ms
 - Inefficient backend code
 - Cold starts (serverless)
 
-**Solutions:**
+**products:**
 ```javascript
 // Use edge functions for dynamic content
 // Vercel example
@@ -104,7 +104,7 @@ res.setHeader('Cache-Control', 's-maxage=60, stale-while-revalidate=300');
 
 **Problem:** Content not in initial HTML.
 
-**Solutions:**
+**products:**
 
 **Server-side rendering (SSR):**
 ```javascript

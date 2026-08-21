@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import solutionsData from "../data/solutions.json";
+import visualProductsData from "../data/solutions.json";
 
 import websImg from "../assets/solutions/webs.webp";
 import qrNfcImg from "../assets/solutions/qr-nfc.webp";
@@ -19,25 +19,25 @@ const imagesMap: Record<string, ImageMetadata> = {
 };
 ---
 
-<section class="solutions-section" id="soluciones">
+<section class="visual-products-section" id="soluciones">
   <div class="section-container">
-    <div class="solutions-canvas">
-      <div class="solutions-grid" id="solutionsShowcase">
+    <div class="visual-products-canvas">
+      <div class="visual-products-grid" id="visualProductsShowcase">
         <!-- LEFT COLUMN: Editorial Header, Interactive Tabs & Detail Copy -->
-        <div class="solutions-left">
-          <div class="solutions-header">
-            <h2 class="solutions-h2">
+        <div class="visual-products-left">
+          <div class="visual-products-header">
+            <h2 class="visual-products-h2">
               Una presencia digital.<br />Todo conectado.
             </h2>
 
             <!-- Interactive Selector Tabs -->
             <div
-              class="solutions-tabs"
+              class="visual-products-tabs"
               role="tablist"
               aria-label="Soluciones para negocios"
             >
               {
-                solutionsData.map((item, index) => (
+                visualProductsData.map((item, index) => (
                   <button
                     type="button"
                     role="tab"
@@ -55,9 +55,9 @@ const imagesMap: Record<string, ImageMetadata> = {
           </div>
 
           <!-- Dynamic Explanation Copy -->
-          <div class="solutions-detail">
+          <div class="visual-products-detail">
             {
-              solutionsData.map((item, index) => (
+              visualProductsData.map((item, index) => (
                 <div
                   class={`detail-pane ${index === 0 ? "is-active" : ""}`}
                   data-detail-index={index}
@@ -75,10 +75,10 @@ const imagesMap: Record<string, ImageMetadata> = {
         </div>
 
         <!-- RIGHT COLUMN: Vertical Visual Showcase Area -->
-        <div class="solutions-right">
+        <div class="visual-products-right">
           <div class="visual-viewport">
             {
-              solutionsData.map((item, index) => (
+              visualProductsData.map((item, index) => (
                 <div
                   class={`visual-item ${index === 0 ? "is-active" : ""}`}
                   data-visual-index={index}
@@ -103,7 +103,7 @@ const imagesMap: Record<string, ImageMetadata> = {
 </section>
 
 <script>
-  const showcase = document.getElementById("solutionsShowcase");
+  const showcase = document.getElementById("visualProductsShowcase");
   if (showcase) {
     const tabBtns = showcase.querySelectorAll<HTMLButtonElement>(".tab-btn");
     const detailPanes = showcase.querySelectorAll(".detail-pane");
@@ -155,21 +155,21 @@ const imagesMap: Record<string, ImageMetadata> = {
 
 <style>
   /* Section Layout */
-  .solutions-section {
+  .visual-products-section {
     width: 100%;
     position: relative;
   }
 
   /* Align the showcase with the hero's wider content frame. */
-  .solutions-section :global(.section-container) {
+  .visual-products-section :global(.section-container) {
     max-width: var(--container-hero);
+    padding-inline: 0;
   }
 
-  .solutions-canvas {
+  .visual-products-canvas {
     width: 100%;
     max-width: var(--container-hero);
     margin-inline: auto;
-
     display: flex;
     flex-direction: column;
 
@@ -182,7 +182,7 @@ const imagesMap: Record<string, ImageMetadata> = {
     overflow: hidden;
   }
 
-  .solutions-grid {
+  .visual-products-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: clamp(2rem, 3.5vw, 3.5rem);
@@ -190,7 +190,7 @@ const imagesMap: Record<string, ImageMetadata> = {
   }
 
   @media (min-width: 1024px) {
-    .solutions-grid {
+    .visual-products-grid {
       grid-template-columns: 1.1fr 0.9fr;
       min-height: 540px;
       max-height: 600px;
@@ -199,20 +199,20 @@ const imagesMap: Record<string, ImageMetadata> = {
   }
 
   /* Left Column: Heading, Tabs & Detail */
-  .solutions-left {
+  .visual-products-left {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 2.5rem;
   }
 
-  .solutions-header {
+  .visual-products-header {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
 
-  .solutions-h2 {
+  .visual-products-h2 {
     font-size: clamp(1.85rem, 3.2vw, 2.75rem);
     font-weight: 600;
     line-height: 1.1;
@@ -222,14 +222,14 @@ const imagesMap: Record<string, ImageMetadata> = {
   }
 
   /* Selector Tabs */
-  .solutions-tabs {
+  .visual-products-tabs {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
   }
 
   @media (max-width: 768px) {
-    .solutions-tabs {
+    .visual-products-tabs {
       flex-wrap: nowrap;
       overflow-x: auto;
       padding-bottom: 6px;
@@ -239,7 +239,7 @@ const imagesMap: Record<string, ImageMetadata> = {
       -webkit-overflow-scrolling: touch;
     }
 
-    .solutions-tabs::-webkit-scrollbar {
+    .visual-products-tabs::-webkit-scrollbar {
       display: none;
     }
   }
@@ -293,7 +293,7 @@ const imagesMap: Record<string, ImageMetadata> = {
   }
 
   /* Detail Pane */
-  .solutions-detail {
+  .visual-products-detail {
     position: relative;
     min-height: 120px;
     display: flex;
@@ -341,7 +341,7 @@ const imagesMap: Record<string, ImageMetadata> = {
   }
 
   /* Right Column: Visual Stage */
-  .solutions-right {
+  .visual-products-right {
     position: relative;
     width: 100%;
     height: 100%;
@@ -349,12 +349,12 @@ const imagesMap: Record<string, ImageMetadata> = {
   }
 
   @media (max-width: 1023px) {
-    .solutions-right {
+    .visual-products-right {
       min-height: 380px;
       order: 2;
     }
 
-    .solutions-detail {
+    .visual-products-detail {
       order: 3;
     }
   }

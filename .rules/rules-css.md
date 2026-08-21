@@ -421,7 +421,7 @@ NO introduzcas estilos específicos de:
 
 - Hero;
 - ProductLoop;
-- Solutions;
+- products;
 - FAQ;
 - Testimonials;
 - otras secciones.

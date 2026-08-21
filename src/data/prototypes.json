@@ -1,0 +1,38 @@
+[
+  {
+    "id": "01",
+    "slug": "hairx-studio",
+    "name": "HairX Studio",
+    "sector": "Peluquerías & Barberías",
+    "tagline": "Identidad editorial & reservas ágiles",
+    "description": "Concepto web enfocado en la imagen del salón, tarifas estructuradas y acceso directo a agenda de citas.",
+    "image": "hairx",
+    "status": "Prototipo disponible",
+    "url": "#",
+    "technologies": ["Astro", "Responsive", "Reserva directa"]
+  },
+  {
+    "id": "02",
+    "slug": "artisan-gastro",
+    "name": "Artisan Gastro",
+    "sector": "Restaurantes & Cafés",
+    "tagline": "Atmósfera gastronómica & carta digital",
+    "description": "Arquitectura pensada para transmitir el ambiente del local, consulta interactiva de menú y fomento de reservas.",
+    "image": "artisan",
+    "status": "Prototipo disponible",
+    "url": "#",
+    "technologies": ["Astro", "Carta QR", "Conversión local"]
+  },
+  {
+    "id": "03",
+    "slug": "lumina-clinic",
+    "name": "Lumina Clinic",
+    "sector": "Salud & Estética",
+    "tagline": "Claridad profesional & generación de confianza",
+    "description": "Estructura limpia orientada a servicios clínicos, presentación del equipo y vías inmediatas de contacto.",
+    "image": "lumina",
+    "status": "Prototipo disponible",
+    "url": "#",
+    "technologies": ["Astro", "Rápida conversión", "SEO Local"]
+  }
+]

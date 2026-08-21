@@ -1,0 +1,358 @@
+---
+import { Image } from 'astro:assets';
+import prototypesData from '../data/prototypes.json';
+
+import hairxImg from '../assets/prototypes/hairx.webp';
+import artisanImg from '../assets/prototypes/artisan.webp';
+import luminaImg from '../assets/prototypes/lumina.webp';
+
+const imagesMap: Record<string, ImageMetadata> = {
+  'hairx': hairxImg,
+  'artisan': artisanImg,
+  'lumina': luminaImg,
+};
+---
+
+<section class="prototypes-section" id="prototipos">
+  <div class="section-container">
+    <!-- Header -->
+    <div class="prototypes-header">
+      <div class="header-top">
+        <div class="prototypes-eyebrow">Prototipos</div>
+        <span class="prototypes-counter">{prototypesData.length.toString().padStart(2, '0')} Conceptos</span>
+      </div>
+      <div class="header-main">
+        <h2 class="prototypes-h2">Diseñamos antes de construir.</h2>
+        <p class="prototypes-desc">
+          Explora diferentes conceptos web creados por 7DStudio para distintos tipos de negocio.
+        </p>
+      </div>
+    </div>
+
+    <!-- Editorial Showcase Grid -->
+    <div class="prototypes-grid">
+      {prototypesData.map((item, index) => (
+        <article class={`prototype-card ${index === 0 ? 'is-featured' : ''}`}>
+          <!-- Visual Preview Stage -->
+          <div class="prototype-visual-wrap">
+            <div class="prototype-visual-stage">
+              <Image 
+                src={imagesMap[item.image]} 
+                alt={`Prototipo ${item.name} para ${item.sector}`}
+                class="prototype-img"
+                loading="lazy"
+                width={1200}
+                height={750}
+              />
+            </div>
+          </div>
+
+          <!-- Metadata & Narrative -->
+          <div class="prototype-info">
+            <div class="info-top">
+              <div class="meta-tag-group">
+                <span class="prototype-num">{item.id}</span>
+                <span class="prototype-sector">{item.sector}</span>
+              </div>
+              <span class="prototype-status">{item.status}</span>
+            </div>
+
+            <div class="info-content">
+              <h3 class="prototype-name">{item.name}</h3>
+              <p class="prototype-p">{item.description}</p>
+            </div>
+
+            <div class="info-bottom">
+              <div class="tech-tags" aria-label="Características destacadas">
+                {item.technologies.map((tech) => (
+                  <span class="tech-tag">{tech}</span>
+                ))}
+              </div>
+
+              <a 
+                href={item.url} 
+                class="prototype-action-link"
+                aria-label={`Explorar prototipo de ${item.name}`}
+              >
+                <span>Explorar prototipo</span>
+                <svg class="action-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M3.333 8h9.334M8.667 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Section Layout */
+  .prototypes-section {
+    width: 100%;
+    position: relative;
+  }
+
+  /* Header */
+  .prototypes-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: clamp(2rem, 4.5vw, 3.5rem);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.15rem;
+  }
+
+  .prototypes-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--text-light-secondary);
+    letter-spacing: -0.01em;
+  }
+
+  .prototypes-eyebrow::before {
+    content: "";
+    width: 5.5px;
+    height: 5.5px;
+    border-radius: 50%;
+    background-color: var(--text-light-primary);
+    flex-shrink: 0;
+  }
+
+  .prototypes-counter {
+    font-size: var(--text-caption);
+    font-weight: 500;
+    color: var(--text-light-secondary);
+    background: rgba(10, 10, 10, 0.04);
+    border: 1px solid var(--border-light-subtle);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--pill-radius);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .header-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .prototypes-h2 {
+    font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+    font-weight: 600;
+    line-height: 1.12;
+    letter-spacing: var(--tracking-tightest);
+    color: var(--text-light-primary);
+    text-wrap: balance;
+  }
+
+  .prototypes-desc {
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--text-light-secondary);
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+
+  /* Editorial Grid */
+  .prototypes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 3vw, 2.5rem);
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .prototypes-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .prototype-card.is-featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: clamp(2rem, 3.5vw, 3rem);
+      align-items: center;
+    }
+  }
+
+  /* Prototype Card */
+  .prototype-card {
+    background-color: var(--bg-canvas-light);
+    border: 1px solid var(--border-light-subtle);
+    border-radius: var(--canvas-radius);
+    padding: clamp(1.25rem, 2.5vw, 2rem);
+    box-shadow: 0 20px 48px -16px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition:
+      transform var(--duration-smooth) var(--ease-default),
+      box-shadow var(--duration-smooth) var(--ease-default),
+      border-color var(--duration-smooth) var(--ease-default);
+  }
+
+  .prototype-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 28px 56px -16px rgba(0, 0, 0, 0.08);
+    border-color: rgba(10, 10, 10, 0.12);
+  }
+
+  /* Visual Wrap */
+  .prototype-visual-wrap {
+    width: 100%;
+    border-radius: calc(var(--canvas-radius) - 6px);
+    overflow: hidden;
+    background-color: #0c0e14;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  .prototype-visual-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+
+  .prototype-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+    transition: transform var(--duration-smooth) var(--ease-default);
+  }
+
+  .prototype-card:hover .prototype-img {
+    transform: scale(1.02);
+  }
+
+  /* Info */
+  .prototype-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex: 1;
+  }
+
+  .info-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .meta-tag-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .prototype-num {
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--text-light-primary);
+    font-family: monospace;
+  }
+
+  .prototype-sector {
+    font-size: var(--text-caption);
+    font-weight: 500;
+    color: var(--text-light-secondary);
+  }
+
+  .prototype-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1b5e20;
+    background: rgba(46, 125, 50, 0.08);
+    border: 1px solid rgba(46, 125, 50, 0.15);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--pill-radius);
+    letter-spacing: 0.01em;
+  }
+
+  /* Info Content */
+  .info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .prototype-name {
+    font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--text-light-primary);
+  }
+
+  .prototype-p {
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--text-light-secondary);
+    font-weight: 400;
+    text-wrap: pretty;
+  }
+
+  /* Info Bottom */
+  .info-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    padding-top: 0.5rem;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tech-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-light-secondary);
+    background: rgba(10, 10, 10, 0.04);
+    border: 1px solid var(--border-light-subtle);
+    padding: 0.2rem 0.55rem;
+    border-radius: 4px;
+  }
+
+  .prototype-action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--text-light-primary);
+    letter-spacing: -0.01em;
+    width: fit-content;
+    padding-block: 0.25rem;
+    transition: color var(--duration-quick) var(--ease-default);
+  }
+
+  .action-arrow {
+    transition: transform var(--duration-quick) var(--ease-default);
+  }
+
+  .prototype-card:hover .action-arrow {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 480px) {
+    .info-top {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+</style>

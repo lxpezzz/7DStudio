@@ -1,0 +1,452 @@
+---
+import differentiators from "../data/differentiators.json";
+---
+
+<section class="criteria" id="criterio">
+  <div class="section-container">
+    <div class="criteria__track" data-criteria>
+      <div class="criteria__sticky">
+        <header class="criteria__intro">
+          <span class="criteria__eyebrow">Criterio</span>
+
+          <h2>Pensado para funcionar, no solo para verse bien.</h2>
+
+          <p>
+            Diseñamos cada proyecto pensando en experiencia, rendimiento y
+            conversión desde el primer momento.
+          </p>
+
+          <div class="criteria__progress" aria-hidden="true">
+            <span data-counter>01 / 04</span>
+            <span class="criteria__progress-track">
+              <span data-progress></span>
+            </span>
+          </div>
+        </header>
+
+        <div class="criteria__content">
+          <nav class="criteria__nav" aria-label="Criterios de diseño">
+            {
+              differentiators.map((item, index) => (
+                <button
+                  type="button"
+                  class:list={["criteria__button", { active: index === 0 }]}
+                  data-index={index}
+                  data-description={item.description}
+                  aria-pressed={index === 0 ? "true" : "false"}
+                >
+                  <span>{item.id}</span>
+                  <strong>{item.title}</strong>
+                </button>
+              ))
+            }
+          </nav>
+
+          <div
+            class="criteria__visual"
+            data-visual
+            data-active="0"
+            aria-hidden="true"
+          >
+            <div class="visual visual--design">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div class="visual visual--mobile">
+              <div class="phone">
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+            </div>
+
+            <div class="visual visual--performance">
+              <span>LOAD <i></i></span>
+              <span>SPEED <i></i></span>
+              <span>WEIGHT <i></i></span>
+            </div>
+
+            <div class="visual visual--conversion">
+              <span>Visita</span>
+              <i>→</i>
+              <span>Interés</span>
+              <i>→</i>
+              <strong>Contacto</strong>
+            </div>
+          </div>
+
+          <p class="criteria__description" data-description>
+            {differentiators[0]?.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initCriteria() {
+    const root = document.querySelector<HTMLElement>("[data-criteria]");
+    if (!root || root.dataset.ready) return;
+
+    root.dataset.ready = "true";
+
+    const buttons = [
+      ...root.querySelectorAll<HTMLButtonElement>("[data-index]"),
+    ];
+    const visual = root.querySelector<HTMLElement>("[data-visual]");
+    const description = root.querySelector<HTMLElement>(
+      "[data-description]:not(button)",
+    );
+    const counter = root.querySelector<HTMLElement>("[data-counter]");
+    const progress = root.querySelector<HTMLElement>("[data-progress]");
+
+    let active = 0;
+    let ticking = false;
+
+    const update = (index: number) => {
+      if (index === active && visual?.dataset.active === String(index)) return;
+
+      active = index;
+
+      buttons.forEach((button, i) => {
+        const selected = i === index;
+        button.classList.toggle("active", selected);
+        button.setAttribute("aria-pressed", String(selected));
+      });
+
+      if (visual) visual.dataset.active = String(index);
+
+      if (description) {
+        description.textContent = buttons[index].dataset.description ?? "";
+      }
+
+      if (counter) {
+        counter.textContent = `0${index + 1} / 0${buttons.length}`;
+      }
+
+      if (progress) {
+        progress.style.transform = `scaleX(${(index + 1) / buttons.length})`;
+      }
+    };
+
+    buttons.forEach((button, index) => {
+      button.addEventListener("click", () => update(index));
+    });
+
+    const handleScroll = () => {
+      if (window.innerWidth < 1024 || ticking) return;
+
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        const rect = root.getBoundingClientRect();
+        const distance = root.offsetHeight - window.innerHeight;
+
+        if (distance > 0) {
+          const progress = Math.min(1, Math.max(0, -rect.top / distance));
+          const index = Math.min(
+            buttons.length - 1,
+            Math.floor(progress * buttons.length),
+          );
+
+          update(index);
+        }
+
+        ticking = false;
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+  }
+
+  initCriteria();
+  document.addEventListener("astro:page-load", initCriteria);
+</script>
+
+<style>
+  .criteria {
+    width: 100%;
+  }
+
+  .criteria__track {
+    position: relative;
+  }
+
+  .criteria__sticky {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .criteria__intro h2 {
+    max-width: 12ch;
+    margin: 1rem 0;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: var(--tracking-tightest);
+  }
+
+  .criteria__intro p,
+  .criteria__description {
+    max-width: 42ch;
+    color: var(--text-light-secondary);
+    line-height: 1.55;
+  }
+
+  .criteria__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-caption);
+  }
+
+  .criteria__eyebrow::before {
+    content: "";
+    width: 6px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .criteria__progress {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 3rem;
+    font-size: 0.75rem;
+  }
+
+  .criteria__progress-track {
+    width: 90px;
+    height: 2px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .criteria__progress-track > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: currentColor;
+    transform: scaleX(0.25);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .criteria__content {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .criteria__nav {
+    border-bottom: 1px solid var(--border-light-subtle);
+  }
+
+  .criteria__button {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    align-items: center;
+    gap: 0.75rem;
+
+    padding: 0.7rem 0;
+
+    border: 0;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+
+    opacity: 0.4;
+    transition:
+      opacity 0.25s ease,
+      transform 0.25s ease;
+  }
+
+  .criteria__button:hover {
+    opacity: 0.7;
+  }
+
+  .criteria__button.active {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+  .criteria__button span {
+    font: 600 0.75rem monospace;
+  }
+
+  .criteria__button strong {
+    font-size: clamp(1rem, 1.4vw, 1.2rem);
+    font-weight: 500;
+  }
+
+  .criteria__visual {
+    position: relative;
+    min-height: 230px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+
+    border: 1px solid var(--border-light-subtle);
+    border-radius: var(--canvas-radius);
+    background: var(--bg-canvas-light);
+  }
+
+  .visual {
+    position: absolute;
+    width: min(80%, 380px);
+
+    opacity: 0;
+    transform: translateY(8px);
+
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease;
+  }
+
+  [data-active="0"] .visual--design,
+  [data-active="1"] .visual--mobile,
+  [data-active="2"] .visual--performance,
+  [data-active="3"] .visual--conversion {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Diseño */
+
+  .visual--design {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: 30px 80px;
+    gap: 8px;
+  }
+
+  .visual--design span {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 6px;
+  }
+
+  .visual--design span:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .visual--design span:nth-child(2) {
+    background: var(--text-light-primary);
+  }
+
+  /* Mobile */
+
+  .visual--mobile {
+    display: grid;
+    place-items: center;
+  }
+
+  .phone {
+    width: 120px;
+    aspect-ratio: 9 / 16;
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    border-radius: 18px;
+    background: var(--text-light-primary);
+  }
+
+  .phone i {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.75);
+  }
+
+  .phone i:nth-child(2) {
+    height: 70px;
+    opacity: 0.25;
+  }
+
+  /* Rendimiento */
+
+  .visual--performance {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .visual--performance span {
+    display: grid;
+    grid-template-columns: 65px 1fr;
+    align-items: center;
+    gap: 1rem;
+    font: 0.7rem monospace;
+  }
+
+  .visual--performance i {
+    display: block;
+    height: 5px;
+    background: var(--text-light-primary);
+    transform-origin: left;
+  }
+
+  .visual--performance span:nth-child(3) i {
+    transform: scaleX(0.45);
+  }
+
+  /* Conversión */
+
+  .visual--conversion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.6rem, 2vw, 1.5rem);
+    font-size: 0.875rem;
+  }
+
+  .visual--conversion strong {
+    padding: 0.6rem 1rem;
+    border-radius: var(--pill-radius);
+    background: var(--text-light-primary);
+    color: var(--bg-canvas-light);
+  }
+
+  @media (min-width: 1024px) {
+    .criteria__track {
+      min-height: 155vh;
+    }
+
+    .criteria__sticky {
+      position: sticky;
+      top: 6rem;
+
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .criteria__progress {
+      display: none;
+    }
+
+    .criteria__nav {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.25rem 1rem;
+    }
+
+    .criteria__button {
+      grid-template-columns: auto 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0s !important;
+    }
+  }
+</style>

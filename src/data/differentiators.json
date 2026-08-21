@@ -1,0 +1,26 @@
+[
+  {
+    "id": "01",
+    "title": "Diseño a medida",
+    "description": "Tu negocio no empieza en una plantilla. Nosotros tampoco.",
+    "type": "layout"
+  },
+  {
+    "id": "02",
+    "title": "Mobile first",
+    "description": "Diseñado primero para la pantalla que tus clientes más utilizan.",
+    "type": "mobile"
+  },
+  {
+    "id": "03",
+    "title": "Rendimiento",
+    "description": "Menos peso. Menos espera. Más velocidad.",
+    "type": "performance"
+  },
+  {
+    "id": "04",
+    "title": "Conversión",
+    "description": "Cada pantalla tiene un objetivo.",
+    "type": "conversion"
+  }
+]
