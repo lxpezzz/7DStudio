@@ -7,6 +7,8 @@ import VisualProducts from "../components/VisualProducts.astro";
 import Process from "../components/Process.astro";
 import Prototypes from "../components/Prototypes.astro";
 import Differentiators from "../components/Differentiators.astro";
+import BrandStatement from "../components/BrandStatement.astro";
+import Customization from "../components/Customization.astro";
 ---
 
 <Layout>
@@ -16,7 +18,22 @@ import Differentiators from "../components/Differentiators.astro";
     <ProductLoop />
     <VisualProducts />
     <Process />
-    <Prototypes />
-    <Differentiators />
+    <div class="prototypes-criteria-canvas">
+      <Prototypes />
+      <Differentiators />
+    </div>
+    <BrandStatement />
+    <Customization />
   </div>
 </Layout>
+
+<style>
+  .prototypes-criteria-canvas {
+    width: 100%;
+    max-width: var(--container-hero);
+    margin-inline: auto;
+    background: var(--bg-canvas-light);
+    border: 1px solid var(--border-light-subtle);
+    border-radius: var(--canvas-radius);
+  }
+</style>
