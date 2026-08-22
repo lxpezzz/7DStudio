@@ -155,101 +155,6 @@ import differentiators from "../data/differentiators.json";
   </div>
 </section>
 
-<script>
-  import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  function initCriteria() {
-    const root = document.querySelector<HTMLElement>("[data-criteria]");
-    if (!root || root.dataset.ready) return;
-
-    root.dataset.ready = "true";
-
-    const buttons = gsap.utils.toArray<HTMLButtonElement>(
-      root.querySelectorAll("[data-index]"),
-    );
-
-    const visual = root.querySelector<HTMLElement>("[data-visual]");
-    const description = root.querySelector<HTMLElement>(
-      "[data-description]:not(button)",
-    );
-    const counter = root.querySelector<HTMLElement>("[data-counter]");
-    const progress = root.querySelector<HTMLElement>("[data-progress]");
-
-    let active = 0;
-
-    const setActive = (index: number) => {
-      if (index === active && visual?.dataset.active === String(index)) return;
-
-      active = index;
-
-      buttons.forEach((button, i) => {
-        const selected = i === index;
-
-        button.classList.toggle("active", selected);
-        button.setAttribute("aria-pressed", String(selected));
-      });
-
-      if (visual) {
-        visual.dataset.active = String(index);
-
-        gsap.fromTo(
-          visual,
-          { y: 10, opacity: 0.65 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.4,
-            ease: "power3.out",
-            overwrite: true,
-          },
-        );
-      }
-
-      if (description) {
-        description.textContent = buttons[index].dataset.description ?? "";
-      }
-
-      if (counter) {
-        counter.textContent = `0${index + 1} / 0${buttons.length}`;
-      }
-
-      if (progress) {
-        gsap.to(progress, {
-          scaleX: (index + 1) / buttons.length,
-          duration: 0.35,
-          ease: "power2.out",
-        });
-      }
-    };
-
-    buttons.forEach((button, index) => {
-      button.addEventListener("click", () => setActive(index));
-    });
-
-    if (window.innerWidth >= 1024) {
-      ScrollTrigger.create({
-        trigger: root,
-        start: "top top+=96",
-        end: "bottom bottom",
-        onUpdate: (self) => {
-          const index = Math.min(
-            buttons.length - 1,
-            Math.floor(self.progress * buttons.length),
-          );
-
-          setActive(index);
-        },
-      });
-    }
-  }
-
-  initCriteria();
-  document.addEventListener("astro:page-load", initCriteria);
-</script>
-
 <style>
   .criteria {
     width: 100%;
@@ -384,11 +289,11 @@ import differentiators from "../data/differentiators.json";
     width: min(80%, 380px);
 
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(6px);
 
     transition:
-      opacity 0.35s ease,
-      transform 0.35s ease;
+      opacity 0.45s ease,
+      transform 0.45s ease;
   }
 
   [data-active="0"] .visual--design,
@@ -508,7 +413,7 @@ import differentiators from "../data/differentiators.json";
 
   @media (min-width: 1024px) {
     .criteria__track {
-      min-height: 155vh;
+      min-height: 120vh;
     }
 
     .criteria__sticky {

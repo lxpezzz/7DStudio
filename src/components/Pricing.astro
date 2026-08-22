@@ -1,0 +1,744 @@
+---
+import pricingData from "../data/pricing.json";
+---
+
+<section class="pricing-matrix-section" id="precios">
+  <div class="section-container">
+    <!-- 1. Editorial Header -->
+    <header class="matrix-header">
+      <div class="matrix-eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        <span>{pricingData.eyebrow}</span>
+      </div>
+
+      <div class="matrix-title-grid">
+        <h2 class="matrix-title">
+          {pricingData.title}
+        </h2>
+
+        <p class="matrix-intro-text">
+          {pricingData.description}
+        </p>
+      </div>
+    </header>
+
+    <!-- 2. Web Plans Editorial Comparison Matrix -->
+    <div class="web-matrix-block">
+      <div class="matrix-section-label">
+        <span class="label-code">01</span>
+        <span class="label-name">Desarrollo Web & Presencia Digital</span>
+      </div>
+
+      <!-- Comparison Layout -->
+      <div class="matrix-table-wrap">
+        <div class="matrix-grid">
+          <!-- Column Headers -->
+          <div class="matrix-head-row">
+            <div class="col-feature-head">
+              <span class="head-caption">Alcance del proyecto</span>
+            </div>
+
+            <div class="col-plan-head plan-landing">
+              <span class="plan-type">Plan Base</span>
+              <h3 class="plan-name">{pricingData.webPlans.plans[0].name}</h3>
+              <div class="plan-price-wrap">
+                <span class="plan-amount">{pricingData.webPlans.plans[0].price}</span>
+                <span class="plan-tax">{pricingData.webPlans.plans[0].tax}</span>
+              </div>
+              <p class="plan-tagline">{pricingData.webPlans.plans[0].tagline}</p>
+            </div>
+
+            <div class="col-plan-head plan-presencia">
+              <div class="featured-indicator">
+                <span class="featured-dot" aria-hidden="true"></span>
+                <span>Recomendado para negocios</span>
+              </div>
+              <h3 class="plan-name">{pricingData.webPlans.plans[1].name}</h3>
+              <div class="plan-price-wrap">
+                <span class="plan-amount">{pricingData.webPlans.plans[1].price}</span>
+                <span class="plan-tax">{pricingData.webPlans.plans[1].tax}</span>
+              </div>
+              <p class="plan-tagline">{pricingData.webPlans.plans[1].tagline}</p>
+            </div>
+          </div>
+
+          <!-- Comparison Rows -->
+          <div class="matrix-body" role="table" aria-label="Comparativa de planes web">
+            {
+              pricingData.webPlans.features.map((feature) => (
+                <div class="matrix-row" role="row">
+                  <div class="col-feature-cell" role="rowheader">
+                    <span class="feature-title">{feature.name}</span>
+                  </div>
+
+                  <!-- Landing Column -->
+                  <div class="col-plan-cell col-landing" role="cell">
+                    <span class="mobile-plan-label">{pricingData.webPlans.plans[0].name}</span>
+                    {feature.landing ? (
+                      <span class="check-icon" aria-label="Incluido">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                          <path
+                            d="M3 8.5L6.5 12L13 4"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    ) : (
+                      <span class="dash-icon" aria-label="No incluido">
+                        —
+                      </span>
+                    )}
+                  </div>
+
+                  <!-- Presencia Digital Column -->
+                  <div class="col-plan-cell col-presencia" role="cell">
+                    <span class="mobile-plan-label">{pricingData.webPlans.plans[1].name}</span>
+                    {feature.presencia ? (
+                      <span class="check-icon is-highlight" aria-label="Incluido">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                          <path
+                            d="M3 8.5L6.5 12L13 4"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          />
+                        </svg>
+                      </span>
+                    ) : (
+                      <span class="dash-icon" aria-label="No incluido">
+                        —
+                      </span>
+                    )}
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Physical Products Block -->
+    <div class="physical-products-block">
+      <div class="matrix-section-label">
+        <span class="label-code">02</span>
+        <span class="label-name">{pricingData.physicalProducts.title}</span>
+      </div>
+
+      <div class="physical-catalog" role="list">
+        {
+          pricingData.physicalProducts.items.map((item) => (
+            <article class="physical-row" role="listitem">
+              <span class="physical-num">{item.num}</span>
+
+              <div class="physical-details">
+                <div class="physical-topline">
+                  <h3 class="physical-name">{item.name}</h3>
+                  <div class="physical-price-wrap">
+                    <span class="physical-price-figure">{item.price}</span>
+                    <span class="physical-tax-label">{item.tax}</span>
+                  </div>
+                </div>
+
+                <p class="physical-desc">{item.description}</p>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- 4. Editorial Closing / Final CTA -->
+    <footer class="matrix-closing-block">
+      <div class="closing-content">
+        <h3 class="closing-heading">{pricingData.cta.title}</h3>
+        <p class="closing-text">{pricingData.cta.description}</p>
+      </div>
+
+      <div class="closing-cta-action">
+        <a
+          href={pricingData.cta.buttonHref}
+          class="closing-cta-button"
+          aria-label="Hablar del proyecto con 7DStudio"
+        >
+          <span>{pricingData.cta.buttonLabel}</span>
+          <svg
+            class="cta-arrow-svg"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3.333 8h9.334M8.667 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     Section Setup & Whitespace
+     ========================================================================== */
+  .pricing-matrix-section {
+    width: 100%;
+    position: relative;
+    padding-block: clamp(4.5rem, 8vw, 8.5rem);
+    background-color: var(--bg-page);
+  }
+
+  /* ==========================================================================
+     1. Editorial Header
+     ========================================================================== */
+  .matrix-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
+  }
+
+  .matrix-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--text-caption);
+    font-weight: 600;
+    color: var(--text-light-secondary);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.25rem;
+  }
+
+  .eyebrow-dot {
+    width: 5.5px;
+    height: 5.5px;
+    border-radius: 50%;
+    background-color: var(--text-light-primary);
+    flex-shrink: 0;
+  }
+
+  .matrix-title-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+    align-items: end;
+  }
+
+  @media (min-width: 1024px) {
+    .matrix-title-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(3rem, 5vw, 5.5rem);
+    }
+  }
+
+  .matrix-title {
+    font-size: clamp(2.15rem, 4.2vw, 3.75rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: var(--tracking-tightest);
+    color: var(--text-light-primary);
+    text-wrap: balance;
+  }
+
+  .matrix-intro-text {
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--text-light-secondary);
+    max-width: 44ch;
+    text-wrap: pretty;
+    padding-bottom: 0.35rem;
+  }
+
+  /* Section Sub-labels */
+  .matrix-section-label {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-light-subtle);
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .label-code {
+    font-size: 0.875rem;
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--text-light-secondary);
+    opacity: 0.6;
+  }
+
+  .label-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-light-primary);
+  }
+
+  /* ==========================================================================
+     2. Web Plans Editorial Comparison Matrix
+     ========================================================================== */
+  .web-matrix-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: clamp(4.5rem, 7.5vw, 7.5rem);
+  }
+
+  .matrix-table-wrap {
+    width: 100%;
+  }
+
+  .matrix-grid {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Column Headers Grid */
+  .matrix-head-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-block: clamp(2rem, 3.5vw, 3rem);
+    border-bottom: 1px solid var(--border-light-subtle);
+  }
+
+  @media (min-width: 860px) {
+    .matrix-head-row {
+      grid-template-columns: 1.3fr 1fr 1.05fr;
+      gap: 2rem;
+      align-items: end;
+    }
+  }
+
+  .col-feature-head {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 0.5rem;
+  }
+
+  @media (max-width: 859px) {
+    .col-feature-head {
+      display: none;
+    }
+  }
+
+  .head-caption {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-light-secondary);
+    opacity: 0.7;
+  }
+
+  .col-plan-head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    padding: 1.5rem clamp(1.25rem, 2vw, 1.75rem);
+    border-radius: 14px;
+    background-color: var(--bg-canvas-light);
+    border: 1px solid var(--border-light-subtle);
+  }
+
+  .col-plan-head.plan-presencia {
+    background-color: #fafaf8;
+    border-color: rgba(10, 10, 10, 0.15);
+    position: relative;
+  }
+
+  .featured-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-light-primary);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.25rem;
+  }
+
+  .featured-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #10b981;
+  }
+
+  .plan-type {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-light-secondary);
+  }
+
+  .plan-name {
+    font-size: clamp(1.4rem, 2vw, 1.75rem);
+    font-weight: 600;
+    color: var(--text-light-primary);
+    letter-spacing: var(--tracking-tightest);
+    line-height: 1.15;
+  }
+
+  .plan-price-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-top: 0.15rem;
+  }
+
+  .plan-amount {
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--text-light-primary);
+    line-height: 1;
+  }
+
+  .plan-tax {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-light-secondary);
+  }
+
+  .plan-tagline {
+    font-size: var(--text-body-sm);
+    color: var(--text-light-secondary);
+    line-height: 1.45;
+    margin-top: 0.35rem;
+    text-wrap: pretty;
+  }
+
+  /* Comparison Rows */
+  .matrix-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .matrix-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-block: 1.15rem;
+    border-bottom: 1px solid var(--border-light-subtle);
+    transition: background-color var(--duration-smooth) var(--ease-default);
+  }
+
+  @media (min-width: 860px) {
+    .matrix-row {
+      grid-template-columns: 1.3fr 1fr 1.05fr;
+      gap: 2rem;
+      align-items: center;
+      padding-inline: 1rem;
+      border-radius: 8px;
+      margin-inline: -1rem;
+    }
+
+    .matrix-row:hover {
+      background-color: rgba(10, 10, 10, 0.018);
+    }
+  }
+
+  .col-feature-cell {
+    display: flex;
+    align-items: center;
+  }
+
+  .feature-title {
+    font-size: clamp(0.95rem, 1.1vw, 1.0625rem);
+    font-weight: 500;
+    color: var(--text-light-primary);
+    line-height: 1.35;
+  }
+
+  .col-plan-cell {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  @media (min-width: 860px) {
+    .col-plan-cell {
+      justify-content: flex-start;
+      padding-left: 1.25rem;
+    }
+  }
+
+  .mobile-plan-label {
+    display: none;
+  }
+
+  @media (max-width: 859px) {
+    .matrix-row {
+      padding-block: 1rem;
+      background-color: var(--bg-canvas-light);
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 0.5rem;
+      border: 1px solid var(--border-light-subtle);
+    }
+
+    .col-feature-cell {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .col-plan-cell {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-block: 0.25rem;
+    }
+
+    .mobile-plan-label {
+      display: inline-block;
+      font-size: 0.8125rem;
+      color: var(--text-light-secondary);
+      font-weight: 500;
+    }
+  }
+
+  .check-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: rgba(10, 10, 10, 0.06);
+    color: var(--text-light-primary);
+  }
+
+  .check-icon.is-highlight {
+    background-color: var(--text-light-primary);
+    color: #ffffff;
+  }
+
+  .dash-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    color: var(--text-light-secondary);
+    opacity: 0.4;
+    font-weight: 600;
+  }
+
+  /* ==========================================================================
+     3. Physical Products Block
+     ========================================================================== */
+  .physical-products-block {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: clamp(4.5rem, 7.5vw, 7.5rem);
+  }
+
+  .physical-catalog {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .physical-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    padding-block: clamp(2.25rem, 4vw, 3.5rem);
+    border-bottom: 1px solid var(--border-light-subtle);
+    transition: background-color var(--duration-smooth) var(--ease-default);
+  }
+
+  @media (min-width: 768px) {
+    .physical-row {
+      grid-template-columns: 64px 1fr;
+      gap: clamp(1.5rem, 3.5vw, 3rem);
+      padding-inline: 1rem;
+      border-radius: 12px;
+      margin-inline: -1rem;
+    }
+
+    .physical-row:hover {
+      background-color: rgba(10, 10, 10, 0.015);
+    }
+  }
+
+  .physical-num {
+    font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+    font-family: monospace;
+    font-weight: 500;
+    color: var(--text-light-secondary);
+    opacity: 0.5;
+    letter-spacing: 0.02em;
+    padding-top: 0.25rem;
+  }
+
+  .physical-row:hover .physical-num {
+    opacity: 0.95;
+    color: var(--text-light-primary);
+  }
+
+  .physical-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .physical-topline {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .physical-name {
+    font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tightest);
+    color: var(--text-light-primary);
+    line-height: 1.2;
+  }
+
+  .physical-price-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    white-space: nowrap;
+  }
+
+  .physical-price-figure {
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--text-light-primary);
+  }
+
+  .physical-tax-label {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-light-secondary);
+  }
+
+  .physical-desc {
+    font-size: clamp(0.95rem, 1.1vw, 1.0625rem);
+    line-height: 1.6;
+    color: var(--text-light-secondary);
+    max-width: 58ch;
+    text-wrap: pretty;
+  }
+
+  /* ==========================================================================
+     4. Editorial Closing / Final CTA
+     ========================================================================== */
+  .matrix-closing-block {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: clamp(2rem, 4vw, 4rem);
+    flex-wrap: wrap;
+    padding-top: clamp(2.5rem, 4.5vw, 4.5rem);
+    border-top: 1px solid var(--border-light-subtle);
+  }
+
+  .closing-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 48ch;
+  }
+
+  .closing-heading {
+    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: var(--tracking-tightest);
+    color: var(--text-light-primary);
+    line-height: 1.15;
+  }
+
+  .closing-text {
+    font-size: var(--text-body);
+    line-height: var(--leading-relaxed);
+    color: var(--text-light-secondary);
+    text-wrap: pretty;
+  }
+
+  .closing-cta-action {
+    display: flex;
+    align-items: center;
+  }
+
+  .closing-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    height: 52px;
+    padding-inline: 2rem;
+    border-radius: var(--pill-radius);
+    background-color: var(--text-light-primary);
+    color: #ffffff;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow: 0 8px 24px -6px rgba(10, 10, 10, 0.18);
+    transition:
+      transform var(--duration-smooth) var(--ease-default),
+      background-color var(--duration-smooth) var(--ease-default),
+      box-shadow var(--duration-smooth) var(--ease-default);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .closing-cta-button:hover {
+    background-color: #232730;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -8px rgba(10, 10, 10, 0.28);
+  }
+
+  .closing-cta-button:active {
+    transform: scale(0.98);
+  }
+
+  .cta-arrow-svg {
+    transition: transform var(--duration-quick) var(--ease-default);
+  }
+
+  .closing-cta-button:hover .cta-arrow-svg {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 640px) {
+    .closing-cta-button {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .matrix-row,
+    .physical-row,
+    .physical-num,
+    .closing-cta-button,
+    .cta-arrow-svg {
+      transition: none !important;
+    }
+  }
+</style>

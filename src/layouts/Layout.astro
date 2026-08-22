@@ -47,5 +47,12 @@ const {
     <div class="page-wrapper">
       <slot />
     </div>
+
+    <script>
+      import { initApp } from "../scripts/animations";
+
+      initApp();
+      document.addEventListener("astro:page-load", initApp);
+    </script>
   </body>
 </html>

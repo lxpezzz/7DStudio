@@ -1,0 +1,111 @@
+{
+  "eyebrow": "Servicios",
+  "title": "Diseña tu presencia digital. Conecta cada punto de contacto.",
+  "description": "Desde una web orientada a conversión hasta productos físicos que conectan tu negocio con tus clientes.",
+  "webPlans": {
+    "title": "Planes Web",
+    "plans": [
+      {
+        "id": "landing-web",
+        "name": "Landing Web",
+        "price": "350€",
+        "tax": "+ IVA",
+        "tagline": "Página web enfocada en captar clientes y convertir visitas.",
+        "isFeatured": false
+      },
+      {
+        "id": "presencia-digital",
+        "name": "Presencia Digital",
+        "price": "500€",
+        "tax": "+ IVA",
+        "tagline": "Presencia web completa con canales integrados y optimización.",
+        "isFeatured": true
+      }
+    ],
+    "features": [
+      {
+        "name": "Diseño personalizado",
+        "landing": true,
+        "presencia": true
+      },
+      {
+        "name": "Responsive mobile-first",
+        "landing": true,
+        "presencia": true
+      },
+      {
+        "name": "SEO técnico",
+        "landing": true,
+        "presencia": true
+      },
+      
+      {
+        "name": "Google Business Profile",
+        "landing": true,
+        "presencia": true
+      },
+      {
+        "name": "Integración Whatsapp y redes sociales",
+        "landing": true,
+        "presencia": true
+      },
+      {
+        "name": "Formulario de contacto",
+        "landing": true,
+        "presencia": true
+      },
+      {
+        "name": "Soporte de lanzamiento",
+        "landing": false,
+        "presencia": true
+      },
+      {
+        "name": "Mantenimiento y soporte mensual",
+        "landing": false,
+        "presencia": true
+      },
+      {
+        "name": "Expositor QR",
+        "landing": false,
+        "presencia": true
+      },
+      {
+        "name": "Pack 5 tarjetas NFC",
+        "landing": false,
+        "presencia": true
+      }
+    ]
+  },
+  "physicalProducts": {
+    "title": "Productos Físicos",
+    "items": [
+      {
+        "num": "01",
+        "name": "Expositores QR",
+        "price": "Desde 35€",
+        "tax": "+ IVA",
+        "description": "Expositores personalizados para conectar tu negocio físico con reseñas, carta digital, reservas o contacto."
+      },
+      {
+        "num": "02",
+        "name": "Tarjetas NFC",
+        "price": "Desde 15€",
+        "tax": "+ IVA",
+        "description": "Tarjetas personalizadas para compartir contacto, redes sociales, web o acceso directo a una experiencia digital."
+      },
+      {
+        "num": "03",
+        "name": "Tarjetas con QR personalizado",
+        "price": "Desde 8€",
+        "tax": "+ IVA",
+        "description": "Tarjetas físicas con diseño adaptado a tu marca y QR configurado para el destino que necesites."
+      }
+    ]
+  },
+  "cta": {
+    "title": "¿Necesitas una combinación distinta?",
+    "description": "Creamos una solución adaptada a tu negocio.",
+    "buttonLabel": "Hablar del proyecto",
+    "buttonHref": "#contacto"
+  }
+}

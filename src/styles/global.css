@@ -1,4 +1,5 @@
 @import './variables.css';
+@import 'lenis/dist/lenis.css';
 
 /* Base Setup & Reset */
 *, *::before, *::after {
@@ -13,7 +14,15 @@ html {
   color: var(--text-light-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
 body {
