@@ -1,109 +1,124 @@
 {
-  "eyebrow": "Servicios",
-  "title": "Diseña tu presencia digital. Conecta cada punto de contacto.",
-  "description": "Desde una web orientada a conversión hasta productos físicos que conectan tu negocio con tus clientes.",
-  "webPlans": {
-    "title": "Planes Web",
+  "header": {
+    "eyebrow": "Soluciones",
+    "title": "Elige la presencia digital que necesita tu negocio.",
+    "description": "Desde una landing enfocada en conversión hasta una presencia completa preparada para crecer."
+  },
+  "webServices": {
+    "sectionCode": "01",
+    "sectionTitle": "Desarrollo Web",
+    "colLabel": "",
     "plans": [
       {
-        "id": "landing-web",
-        "name": "Landing Web",
-        "price": "350€",
+        "id": "landing-experience",
+        "name": "Landing Experience",
+        "price": "Desde 350€",
+        "description": "",
         "tax": "+ IVA",
-        "tagline": "Página web enfocada en captar clientes y convertir visitas.",
         "isFeatured": false
       },
       {
-        "id": "presencia-digital",
-        "name": "Presencia Digital",
-        "price": "500€",
+        "id": "digital-presence",
+        "name": "Digital Presence",
+        "price": "Desde 600€",
+        "description" :"",
         "tax": "+ IVA",
-        "tagline": "Presencia web completa con canales integrados y optimización.",
         "isFeatured": true
       }
     ],
-    "features": [
+    "comparisonFeatures": [
       {
         "name": "Diseño personalizado",
         "landing": true,
-        "presencia": true
+        "digital": true
       },
       {
-        "name": "Responsive mobile-first",
+        "name": "Desarrollo Astro",
         "landing": true,
-        "presencia": true
+        "digital": true
       },
       {
-        "name": "SEO técnico",
+        "name": "Responsive móvil",
         "landing": true,
-        "presencia": true
+        "digital": true
       },
-      
       {
-        "name": "Google Business Profile",
+        "name": "SEO técnico inicial",
         "landing": true,
-        "presencia": true
+        "digital": true
       },
       {
-        "name": "Integración Whatsapp y redes sociales",
-        "landing": true,
-        "presencia": true
-      },
-      {
-        "name": "Formulario de contacto",
-        "landing": true,
-        "presencia": true
-      },
-      {
-        "name": "Soporte de lanzamiento",
+        "name": "Páginas adicionales",
         "landing": false,
-        "presencia": true
+        "digital": true
       },
       {
-        "name": "Mantenimiento y soporte mensual",
+        "name": "Integraciones digitales",
         "landing": false,
-        "presencia": true
+        "digital": true
       },
       {
-        "name": "Expositor QR",
+        "name": "Optimización local",
         "landing": false,
-        "presencia": true
-      },
-      {
-        "name": "Pack 5 tarjetas NFC",
-        "landing": false,
-        "presencia": true
+        "digital": true
       }
+
     ]
   },
   "physicalProducts": {
-    "title": "Productos Físicos",
-    "items": [
+    "sectionCode": "02",
+    "sectionTitle": "Productos Físicos",
+    "subtitle": "Puntos de conexión entre tu negocio y tus clientes.",
+    "products": [
       {
         "num": "01",
         "name": "Expositores QR",
+        "icon": "qr-code",
+        "tagline": "Tu negocio conectado desde el mostrador.",
         "price": "Desde 35€",
         "tax": "+ IVA",
-        "description": "Expositores personalizados para conectar tu negocio físico con reseñas, carta digital, reservas o contacto."
+        "customization": [
+          "Logo",
+          "Colores de marca",
+          "QR dinámico",
+          "Google Reviews",
+          "Redes sociales"
+        ],
+        "imageKey": "expositor"
       },
       {
         "num": "02",
         "name": "Tarjetas NFC",
+        "icon": "contact",
+        "tagline": "Comparte tu identidad digital con un solo toque.",
         "price": "Desde 15€",
         "tax": "+ IVA",
-        "description": "Tarjetas personalizadas para compartir contacto, redes sociales, web o acceso directo a una experiencia digital."
+        "customization": [
+          "Diseño corporativo",
+          "Perfil digital",
+          "Contacto",
+          "Redes"
+        ],
+        "imageKey": "tarjetas"
       },
       {
         "num": "03",
-        "name": "Tarjetas con QR personalizado",
+        "name": "Tarjetas QR personalizadas",
+        "icon": "share",
+        "tagline": "Una tarjeta física que lleva directamente a tu presencia digital.",
         "price": "Desde 8€",
         "tax": "+ IVA",
-        "description": "Tarjetas físicas con diseño adaptado a tu marca y QR configurado para el destino que necesites."
+        "customization": [
+          "Diseño",
+          "QR personalizado",
+          "Información del negocio"
+        ],
+        "imageKey": "cards"
       }
     ]
   },
   "cta": {
-    "title": "¿Necesitas una combinación distinta?",
+    "title": "¿Tienes una idea diferente?",
     "description": "Creamos una solución adaptada a tu negocio.",
     "buttonLabel": "Hablar del proyecto",
     "buttonHref": "#contacto"

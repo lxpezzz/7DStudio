@@ -1,8 +1,6 @@
 import Lenis from "lenis";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap, ScrollTrigger } from "./gsap";
+import { prefersReducedMotion } from "./motion";
 
 let lenisInstance: Lenis | null = null;
 let rafCallback: ((time: number) => void) | null = null;
@@ -10,11 +8,7 @@ let rafCallback: ((time: number) => void) | null = null;
 export function initSmoothScroll(): Lenis | null {
   if (typeof window === "undefined") return null;
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion()) {
     if (lenisInstance) {
       lenisInstance.destroy();
       lenisInstance = null;

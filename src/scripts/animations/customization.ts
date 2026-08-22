@@ -1,4 +1,5 @@
-import gsap from "gsap";
+import { gsap } from "../gsap";
+import { prefersReducedMotion } from "../motion";
 
 export function initCustomization() {
   const root = document.querySelector<HTMLElement>("[data-customization]");
@@ -11,9 +12,7 @@ export function initCustomization() {
   const attrButtons = root.querySelectorAll<HTMLButtonElement>(".attr-btn");
   const copy = root.querySelector<HTMLElement>("#customizationCopy");
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
+  const reduceMotion = prefersReducedMotion();
 
   let activeProductIndex = 0;
   let activeAttrIndex = 0;
@@ -34,7 +33,7 @@ export function initCustomization() {
       pane.setAttribute("aria-hidden", String(!isActive));
 
       if (isActive) {
-        if (!prefersReducedMotion) {
+        if (!reduceMotion) {
           gsap.fromTo(
             pane,
             { opacity: 0, scale: 0.985, y: 8 },
@@ -64,7 +63,7 @@ export function initCustomization() {
     if (tagline && productButtons[targetIndex]) {
       const newTagline = productButtons[targetIndex].dataset.tagline ?? "";
       tagline.textContent = newTagline;
-      if (!prefersReducedMotion) {
+      if (!reduceMotion) {
         gsap.fromTo(
           tagline,
           { opacity: 0, y: 4 },
@@ -87,7 +86,7 @@ export function initCustomization() {
     if (copy && attrButtons[targetIndex]) {
       const newDesc = attrButtons[targetIndex].dataset.description ?? "";
       copy.textContent = newDesc;
-      if (!prefersReducedMotion) {
+      if (!reduceMotion) {
         gsap.fromTo(
           copy,
           { opacity: 0, y: 4 },

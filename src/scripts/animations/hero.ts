@@ -1,12 +1,9 @@
-import gsap from "gsap";
+import { gsap } from "../gsap";
+import { prefersReducedMotion } from "../motion";
 
 export function initHeroAnimation() {
   const hero = document.getElementById("hero");
   if (!hero) return;
-
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
 
   const eyebrow = hero.querySelector(".hero-eyebrow");
   const titleLead = hero.querySelector(".title-lead");
@@ -15,7 +12,7 @@ export function initHeroAnimation() {
   const actions = hero.querySelectorAll(".hero-actions > *");
   const footer = hero.querySelector(".hero-footer-bar");
 
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion()) {
     gsap.set([eyebrow, titleLead, titleSub, desc, actions, footer], {
       opacity: 1,
       y: 0,
@@ -58,7 +55,7 @@ export function initHeroAnimation() {
     );
   }
 
-  if (actions && actions.length > 0) {
+  if (actions.length > 0) {
     tl.fromTo(
       actions,
       { opacity: 0, y: 18 },

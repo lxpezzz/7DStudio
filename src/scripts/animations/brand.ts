@@ -1,5 +1,5 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "../gsap";
+import { prefersReducedMotion } from "../motion";
 
 export function initBrandAnimation() {
   const section = document.getElementById("statementScene");
@@ -12,11 +12,7 @@ export function initBrandAnimation() {
 
   if (!frame || !title || !desc || !actions) return;
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
-
-  if (prefersReducedMotion) {
+  if (prefersReducedMotion()) {
     gsap.set([frame, title, desc, actions], {
       opacity: 1,
       y: 0,

@@ -1,5 +1,4 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap, ScrollTrigger } from "../gsap";
 
 export function initDifferentiators() {
   const root = document.querySelector<HTMLElement>("[data-criteria]");

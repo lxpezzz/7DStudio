@@ -1,16 +1,17 @@
+import { prefersReducedMotion } from "../motion";
+
 export function initProductLoop() {
   const loopRoot = document.getElementById("productSalesLoop");
   if (!loopRoot) return;
 
   const textSlides = loopRoot.querySelectorAll(".text-slide");
   const visualSlides = loopRoot.querySelectorAll(".visual-slide");
-  const indicatorBtns = loopRoot.querySelectorAll(".indicator-btn");
+  const indicatorBtns =
+    loopRoot.querySelectorAll<HTMLButtonElement>(".indicator-btn");
 
   let currentIndex = 0;
   const AUTOPLAY_DURATION = 4500;
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
+  const reduceMotion = prefersReducedMotion();
 
   loopRoot.style.setProperty("--autoplay-duration", `${AUTOPLAY_DURATION}ms`);
 
@@ -31,7 +32,7 @@ export function initProductLoop() {
 
     indicatorBtns.forEach((btn, i) => {
       const active = i === index;
-      const fill = btn.querySelector(".progress-fill") as HTMLElement | null;
+      const fill = btn.querySelector<HTMLElement>(".progress-fill");
 
       btn.classList.remove("is-active");
       btn.setAttribute("aria-selected", String(active));
@@ -56,7 +57,7 @@ export function initProductLoop() {
   indicatorBtns.forEach((btn, idx) => {
     const fill = btn.querySelector(".progress-fill");
     fill?.addEventListener("animationend", () => {
-      if (btn.classList.contains("is-active") && !prefersReducedMotion) {
+      if (btn.classList.contains("is-active") && !reduceMotion) {
         nextSlide();
       }
     });
@@ -66,18 +67,14 @@ export function initProductLoop() {
     });
   });
 
-  loopRoot.addEventListener("mouseenter", () =>
-    loopRoot.classList.add("is-paused"),
-  );
-  loopRoot.addEventListener("mouseleave", () =>
-    loopRoot.classList.remove("is-paused"),
-  );
-  loopRoot.addEventListener("focusin", () =>
-    loopRoot.classList.add("is-paused"),
-  );
-  loopRoot.addEventListener("focusout", () =>
-    loopRoot.classList.remove("is-paused"),
-  );
+  const setPaused = (paused: boolean) => {
+    loopRoot.classList.toggle("is-paused", paused);
+  };
+
+  loopRoot.addEventListener("mouseenter", () => setPaused(true));
+  loopRoot.addEventListener("mouseleave", () => setPaused(false));
+  loopRoot.addEventListener("focusin", () => setPaused(true));
+  loopRoot.addEventListener("focusout", () => setPaused(false));
 
   setSlide(0);
 }

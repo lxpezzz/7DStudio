@@ -1,0 +1,484 @@
+---
+import { CircleCheck, Minus } from "lucide";
+import LucideIcon from "./LucideIcon.astro";
+
+export interface Plan {
+  id: string;
+  name: string;
+  price: string;
+  tax: string;
+  description: string;
+  isFeatured?: boolean;
+}
+
+export interface ComparisonFeature {
+  name: string;
+  landing: boolean;
+  digital: boolean;
+  [key: string]: boolean | string;
+}
+
+interface Props {
+  sectionCode: string;
+  sectionTitle: string;
+  plans: Plan[];
+  comparisonFeatures: ComparisonFeature[];
+}
+
+const { sectionCode, sectionTitle, plans, comparisonFeatures } = Astro.props;
+
+/** Helper to get feature inclusion based on plan index or plan id */
+function isFeatureIncluded(feature: ComparisonFeature, plan: Plan, index: number): boolean {
+  if (plan.id === "landing-experience" || index === 0) return Boolean(feature.landing);
+  if (plan.id === "digital-presence" || index === 1) return Boolean(feature.digital);
+  return Boolean(feature[plan.id]);
+}
+---
+
+<div class="block-web-comparison" data-comparison data-reveal>
+  <div class="block-label">
+    <span class="block-code">{sectionCode}</span>
+    <span class="block-name">{sectionTitle}</span>
+  </div>
+
+  <!-- Desktop Unified Comparison Canvas (Dynamic Grid) -->
+  <div class="comparison-canvas comparison-desktop">
+    <div class="comparison-grid-table">
+      <!-- Top Row: Headers & Plan Summaries -->
+      <div class="grid-row grid-header-row">
+        <!-- Empty Top-Left Header Cell -->
+        <div class="grid-cell cell-category-label"></div>
+
+        {
+          plans.map((plan) => (
+            <div
+              class="grid-cell cell-plan-header"
+              data-plan-id={plan.id}
+              data-featured={plan.isFeatured ? "true" : "false"}
+            >
+              {plan.isFeatured && (
+                <span class="plan-floating-badge">Recomendado</span>
+              )}
+
+              <h3 class="plan-heading">{plan.name}</h3>
+
+              <div class="plan-price-group">
+                <span class="price-figure">{plan.price}</span>
+                <span class="price-tax-label">{plan.tax}</span>
+              </div>
+
+              <p class="plan-lead">{plan.description}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Feature Rows -->
+      {
+        comparisonFeatures.map((feature) => (
+          <div class="grid-row grid-feature-row">
+            <!-- Concept Label (Centered) -->
+            <div class="grid-cell cell-feature-title">
+              <span class="feature-text">{feature.name}</span>
+            </div>
+
+            {
+              plans.map((plan, idx) => {
+                const included = isFeatureIncluded(feature, plan, idx);
+                return (
+                  <div
+                    class="grid-cell cell-value"
+                    data-plan-id={plan.id}
+                    data-featured={plan.isFeatured ? "true" : "false"}
+                  >
+                    {included ? (
+                      <span class="lucide-wrap icon-check" aria-label="Incluido">
+                        <LucideIcon icon={CircleCheck} size={16} strokeWidth={1.8} />
+                      </span>
+                    ) : (
+                      <span class="lucide-wrap icon-minus" aria-label="No incluido">
+                        <LucideIcon icon={Minus} size={16} strokeWidth={1.8} />
+                      </span>
+                    )}
+                  </div>
+                );
+              })
+            }
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Mobile View: Clean Sequential Composition (No Horizontal Scroll) -->
+  <div class="comparison-mobile">
+    {
+      plans.map((plan, planIdx) => (
+        <article class="mobile-plan-block" data-featured={plan.isFeatured ? "true" : "false"}>
+          {plan.isFeatured && (
+            <span class="plan-floating-badge mobile-floating-badge">Recomendado</span>
+          )}
+
+          <div class="mobile-plan-header">
+            <h3 class="mobile-plan-title">{plan.name}</h3>
+            <div class="mobile-plan-price">
+              <span class="price-figure">{plan.price}</span>
+              <span class="price-tax-label">{plan.tax}</span>
+            </div>
+            <p class="mobile-plan-desc">{plan.description}</p>
+          </div>
+
+          <div class="mobile-features-list">
+            {
+              comparisonFeatures.map((feature) => {
+                const included = isFeatureIncluded(feature, plan, planIdx);
+                return (
+                  <div class="mobile-feature-row">
+                    <span class="mobile-feature-name">{feature.name}</span>
+                    {included ? (
+                      <span class="lucide-wrap icon-check" aria-label="Incluido">
+                        <LucideIcon icon={CircleCheck} size={16} strokeWidth={1.8} />
+                      </span>
+                    ) : (
+                      <span class="lucide-wrap icon-minus" aria-label="No incluido">
+                        <LucideIcon icon={Minus} size={16} strokeWidth={1.8} />
+                      </span>
+                    )}
+                  </div>
+                );
+              })
+            }
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .block-web-comparison {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: clamp(4.5rem, 7vw, 7rem);
+  }
+
+  .block-label {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-light-subtle);
+    width: 100%;
+    margin-bottom: clamp(2rem, 3.5vw, 3rem);
+  }
+
+  .block-code {
+    font-size: 0.875rem;
+    font-family: monospace;
+    font-weight: 600;
+    color: var(--text-light-secondary);
+    opacity: 0.6;
+  }
+
+  .block-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-light-primary);
+  }
+
+  /* Desktop View Canvas: Single continuous surface with unbroken column tint */
+  .comparison-canvas.comparison-desktop {
+    display: none;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+    background-color: #f3f3f0;
+    border: 1px solid rgba(10, 10, 10, 0.08);
+    border-radius: var(--canvas-radius);
+  }
+
+  @media (min-width: 860px) {
+    .comparison-canvas.comparison-desktop {
+      display: block;
+    }
+  }
+
+  /* Unified Grid Table: Background gradient gives Digital Presence a 100% continuous vertical band */
+  .comparison-grid-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: var(--canvas-radius);
+    background: linear-gradient(
+      to right,
+      #f3f3f0 0%,
+      #f3f3f0 65%,
+      #e9e9e5 65%,
+      #e9e9e5 100%
+    );
+  }
+
+  /* Desktop Grid Proportions: 30% Characteristic / 35% Landing / 35% Digital */
+  .grid-row {
+    display: grid;
+    grid-template-columns: 30% 35% 35%;
+    width: 100%;
+    background: transparent;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.04);
+  }
+
+  .grid-row:last-child {
+    border-bottom: none;
+  }
+
+  /* Grid Cells: Strictly transparent, zero boxes, zero borders, zero shadows */
+  .grid-cell {
+    display: flex;
+    flex-direction: column;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
+  }
+
+  /* Top Row Headers */
+  .grid-header-row {
+    background: transparent;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.05);
+  }
+
+  .cell-category-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  .cell-plan-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: clamp(2rem, 3vw, 2.5rem) clamp(1.25rem, 2vw, 1.75rem) clamp(1.6rem, 2.4vw, 2.1rem);
+  }
+
+  /* Floating Editorial Badge (50% overlapping the top-right border) */
+  .plan-floating-badge {
+    position: absolute;
+    top: -14px;
+    right: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding-inline: 13px;
+    border-radius: 999px;
+    background-color: var(--text-light-primary);
+    color: #ffffff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1;
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 4px 12px -2px rgba(10, 10, 10, 0.18);
+  }
+
+  .plan-heading {
+    font-size: clamp(1.25rem, 1.5vw, 1.45rem);
+    font-weight: 600;
+    color: var(--text-light-primary);
+    letter-spacing: var(--tracking-tightest);
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .plan-price-group {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+  }
+
+  .price-figure {
+    font-size: clamp(1.6rem, 2.2vw, 2rem);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    color: var(--text-light-primary);
+    line-height: 1;
+  }
+
+  .price-tax-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-light-secondary);
+  }
+
+  .plan-lead {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--text-light-secondary);
+    margin-top: 0.65rem;
+    max-width: 28ch;
+    text-align: center;
+    text-wrap: pretty;
+  }
+
+  [data-featured="true"] .plan-lead {
+    color: #3b404d;
+  }
+
+  /* Feature Comparison Rows */
+  .grid-feature-row {
+    align-items: center;
+    background: transparent;
+  }
+
+  .cell-feature-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.75rem clamp(0.85rem, 1.8vw, 1.4rem);
+  }
+
+  .feature-text {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-light-primary);
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+
+  /* Perfectly Centered Values in Columns */
+  .cell-value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: 0.75rem;
+    text-align: center;
+  }
+
+  /* Lucide Icon Wrappers: Bare Icons, Zero Box, Zero Background */
+  .lucide-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .icon-check {
+    color: var(--text-light-primary);
+  }
+
+  .icon-minus {
+    color: rgba(10, 10, 10, 0.25);
+  }
+
+  /* ==========================================================================
+     Mobile View
+     ========================================================================== */
+  .comparison-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  @media (min-width: 860px) {
+    .comparison-mobile {
+      display: none;
+    }
+  }
+
+  .mobile-plan-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f3f0;
+    border: 1px solid rgba(10, 10, 10, 0.07);
+    border-radius: var(--canvas-radius);
+    padding: clamp(1.5rem, 4vw, 2rem);
+  }
+
+  .mobile-plan-block[data-featured="true"] {
+    background-color: #e9e9e5;
+    border-color: rgba(10, 10, 10, 0.09);
+  }
+
+  .mobile-floating-badge {
+    top: -14px;
+    right: 18px;
+  }
+
+  .mobile-plan-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border-light-subtle);
+  }
+
+  .mobile-plan-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: var(--tracking-tightest);
+    color: var(--text-light-primary);
+  }
+
+  .mobile-plan-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-top: 0.15rem;
+  }
+
+  .mobile-plan-desc {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--text-light-secondary);
+    margin-top: 0.25rem;
+  }
+
+  .mobile-features-list {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.75rem;
+  }
+
+  .mobile-feature-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.65rem;
+    border-bottom: 1px solid rgba(10, 10, 10, 0.05);
+  }
+
+  .mobile-feature-row:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-feature-name {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-light-primary);
+  }
+</style>
