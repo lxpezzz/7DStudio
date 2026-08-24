@@ -13,14 +13,12 @@ const imagesMap: Record<string, ImageMetadata> = {
 };
 ---
 
-<section class="products-section" id="servicios">
+<section class="products-section" id="productos" data-header-theme="dark">
   <div class="section-container">
     <div class="product-twin-grid" id="productSalesLoop">
       <!-- LEFT BLOCK: Compact Editorial Content & Studio CTA -->
       <div class="editorial-card">
         <div class="editorial-content-wrap">
-      
-
           <!-- Dynamic Text Stack -->
           <div class="editorial-text-stack">
             {
@@ -112,6 +110,8 @@ const imagesMap: Record<string, ImageMetadata> = {
   .products-section {
     width: 100%;
     position: relative;
+    padding-top: 200px;
+    padding-bottom: 200px;
   }
 
   .product-twin-grid {
@@ -147,7 +147,6 @@ const imagesMap: Record<string, ImageMetadata> = {
     flex-direction: column;
     width: 100%;
   }
-
 
   /* Text Stack */
   .editorial-text-stack {

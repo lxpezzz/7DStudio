@@ -6,7 +6,7 @@ import LucideIcon from "./pricing/LucideIcon.astro";
 const { title, subtitle, items } = faqData;
 ---
 
-<section class="faq-section" id="faq" data-faq>
+<section class="faq-section" id="FAQ" data-faq data-header-theme="dark">
   <div class="section-container">
     <!-- Header -->
     <header class="faq-header">
@@ -101,8 +101,9 @@ const { title, subtitle, items } = faqData;
     width: 100%;
     position: relative;
     background-color: #f5f5f3;
-    border-radius: %;
-    
+    border-radius: var(--canvas-radius); 
+    padding-top: 4rem; 
+    padding-bottom: 4rem
   }
 
   .faq-header {
@@ -200,7 +201,7 @@ const { title, subtitle, items } = faqData;
     letter-spacing: 0.04em;
     user-select: none;
     transform: translateY(-1px);
-    padding-left: 12px;
+    padding-left: 20px;
   }
 
   .faq-item.is-open .faq-num {
@@ -215,6 +216,7 @@ const { title, subtitle, items } = faqData;
     letter-spacing: -0.015em;
     line-height: 1.35;
     text-wrap: pretty;
+    padding-left: 20px;
   }
 
   .faq-item.is-open .faq-question {
@@ -232,6 +234,7 @@ const { title, subtitle, items } = faqData;
     color: var(--text-light-secondary);
     transform: translateY(2px);
     transition: color var(--duration-quick) var(--ease-default);
+    padding-right: 80px;
   }
 
   .faq-item.is-open .faq-icon-wrap {
@@ -243,7 +246,6 @@ const { title, subtitle, items } = faqData;
     position: absolute;
     inset: 0;
     display: flex;
-    padding-rig
     align-items: center;
     justify-content: center;
     transition:

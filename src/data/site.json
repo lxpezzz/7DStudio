@@ -4,20 +4,28 @@
   "description": "Estudio de diseño y desarrollo web para negocios. Creamos productos digitales a medida, interfaces de alto nivel y experiencias con impacto real.",
   "nav": [
     {
-      "label": "Proyectos",
-      "href": "#proyectos"
+      "label": "Productos",
+      "href": "#productos"
     },
     {
-      "label": "Servicios",
-      "href": "#servicios"
+      "label": "Demos",
+      "href": "#demos"
     },
     {
-      "label": "Estudio",
-      "href": "#estudio"
+      "label": "Precios",
+      "href": "#precios"
     },
     {
-      "label": "Estudio",
-      "href": "#estudio"
+      "label": "Metodología",
+      "href": "#metodologia"
+    },
+    {
+      "label": "FAQ",
+      "href": "#FAQ"
+    },
+    {
+      "label": "Contacto",
+      "href": "#contacto"
     }
   ],
   "cta": {
