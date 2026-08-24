@@ -19,7 +19,7 @@ const imagesMap: Record<string, ImageMetadata> = {
       <!-- LEFT BLOCK: Compact Editorial Content & Studio CTA -->
       <div class="editorial-card">
         <div class="editorial-content-wrap">
-          <div class="editorial-eyebrow">Qué hacemos</div>
+      
 
           <!-- Dynamic Text Stack -->
           <div class="editorial-text-stack">
@@ -112,13 +112,12 @@ const imagesMap: Record<string, ImageMetadata> = {
   .products-section {
     width: 100%;
     position: relative;
-    padding-top: 0;
   }
 
   .product-twin-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 8px;
     align-items: stretch;
     width: 100%;
   }
@@ -149,25 +148,6 @@ const imagesMap: Record<string, ImageMetadata> = {
     width: 100%;
   }
 
-  .editorial-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: var(--text-caption);
-    font-weight: 600;
-    color: var(--text-light-secondary);
-    letter-spacing: -0.01em;
-    margin-bottom: 1.15rem;
-  }
-
-  .editorial-eyebrow::before {
-    content: "";
-    width: 5.5px;
-    height: 5.5px;
-    border-radius: 50%;
-    background-color: #0e1014;
-    flex-shrink: 0;
-  }
 
   /* Text Stack */
   .editorial-text-stack {
@@ -272,7 +252,12 @@ const imagesMap: Record<string, ImageMetadata> = {
   /* Visual Card Stage */
   .visual-card {
     background-color: #0b0b0b;
-    background-image: radial-gradient(120% 90% at 70% 15%, #252525 0%, #131313 55%, #0a0a0a 100%);
+    background-image: radial-gradient(
+      120% 90% at 70% 15%,
+      #252525 0%,
+      #131313 55%,
+      #0a0a0a 100%
+    );
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: var(--canvas-radius);
     position: relative;

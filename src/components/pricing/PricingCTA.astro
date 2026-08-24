@@ -12,7 +12,7 @@ interface Props {
 const { title, description, buttonLabel, buttonHref } = Astro.props;
 ---
 
-<footer class="pricing-cta-footer" data-cta data-reveal>
+<footer class="pricing-cta-footer" data-cta data-reveal data-pricing-cta>
   <div class="cta-narrative">
     <h3 class="cta-heading">{title}</h3>
     <p class="cta-text">{description}</p>
@@ -33,9 +33,9 @@ const { title, description, buttonLabel, buttonHref } = Astro.props;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: clamp(2rem, 4vw, 4rem);
+    gap: clamp(1rem, 2vw, 2rem);
     flex-wrap: wrap;
-    padding-top: clamp(2.5rem, 4.5vw, 4.5rem);
+    padding-top: clamp(1rem, 2vw, 2rem);
     border-top: 1px solid var(--border-light-subtle);
   }
 
@@ -88,10 +88,16 @@ const { title, description, buttonLabel, buttonHref } = Astro.props;
     text-decoration: none;
   }
 
-  .cta-button:hover {
-    background-color: #232730;
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px -8px rgba(10, 10, 10, 0.28);
+  @media (hover: hover) and (pointer: fine) {
+    .cta-button:hover {
+      background-color: #232730;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px -8px rgba(10, 10, 10, 0.28);
+    }
+
+    .cta-button:hover .cta-arrow {
+      transform: translateX(3px);
+    }
   }
 
   .cta-button:active {
@@ -106,10 +112,6 @@ const { title, description, buttonLabel, buttonHref } = Astro.props;
 
   .cta-arrow {
     transition: transform var(--duration-quick) var(--ease-default);
-  }
-
-  .cta-button:hover .cta-arrow {
-    transform: translateX(3px);
   }
 
   @media (max-width: 640px) {

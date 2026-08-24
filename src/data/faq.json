@@ -1,0 +1,44 @@
+{
+  "title": "Preguntas frecuentes.",
+  "subtitle": "Todo lo que necesitas saber antes de empezar.",
+  "items": [
+    {
+      "num": "01",
+      "question": "¿Qué incluye el precio?",
+      "answer": "Incluye el diseño y desarrollo de tu web, adaptación a móvil, configuración básica para buscadores y publicación. Te la entregamos lista para empezar a utilizarla."
+    },
+    {
+      "num": "02",
+      "question": "¿Cómo se realiza el pago?",
+      "answer": "El pago se divide en dos partes: un <strong>20% + IVA</strong> al confirmar el proyecto y el <strong>80% + IVA</strong> restante cuando el trabajo está terminado y listo para entregar."
+    },
+    {
+      "num": "03",
+      "question": "¿Cuánto tarda en estar lista?",
+      "answer": "Una landing page suele estar lista en <strong>7 días laborables</strong>. Si el proyecto necesita más tiempo por su tamaño o personalización, te indicaremos el plazo antes de empezar."
+    },
+    {
+      "num": "04",
+      "question": "¿Dominio y hosting están incluidos?",
+      "answer": "<strong>Sí.</strong> El precio incluye el dominio y el hosting durante el primer año, para que no tengas que preocuparte por la parte técnica."
+    },
+    {
+      "num": "05",
+      "question": "¿Incluye mantenimiento?",
+      "answer": "<strong>Sí.</strong> Durante el primer año incluimos el mantenimiento básico necesario para que la web siga funcionando correctamente. Si más adelante necesitas cambios o mejoras, podemos realizarlos aparte."
+    },
+    {
+      "num": "06",
+      "question": "¿La web será de mi propiedad?",
+      "answer": "<strong>Sí, completamente.</strong> Una vez finalizado y pagado el proyecto, la web y sus contenidos serán 100% tuyos, sin permanencias ni obligaciones de continuar con nosotros."
+    },
+    {
+      "num": "07",
+      "question": "¿Cómo funcionan los productos QR y NFC?",
+      "answer": "Los configuramos para que tus clientes puedan acceder fácilmente a lo que necesites: reseñas de Google, tu web, redes sociales, WhatsApp, carta digital o cualquier otro enlace. Te los entregamos listos para usar."
+    },
+    {"num": "08",
+      "question": "¿Cómo creáis mi página web?",
+      "answer": "Trabajamos cada proyecto desde cero utilizando HTML, CSS, JavaScript y Astro, sin WordPress ni constructores cerrados. Esto nos permite tener un control total sobre el diseño, el rendimiento y la experiencia final de la web."}
+  ]
+}

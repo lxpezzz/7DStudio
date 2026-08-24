@@ -5,10 +5,6 @@ import siteData from "../data/site.json";
 <section class="hero-section" id="hero">
   <div class="canvas-container hero-canvas">
     <div class="hero-content">
-      <!-- Eyebrow Pill -->
-      <div class="hero-eyebrow">
-        {siteData.hero.badge}
-      </div>
 
       <!-- Editorial Typography Split -->
       <div class="hero-header-grid">
@@ -62,7 +58,7 @@ import siteData from "../data/site.json";
   .hero-section {
     width: 100%;
     position: relative;
-    padding-top: 0;
+
   }
 
   .hero-canvas {
@@ -92,7 +88,7 @@ import siteData from "../data/site.json";
     position: relative;
     z-index: 10;
     width: 100%;
-    max-width: var(--container-width);
+    max-width: var(--container-hero);
     margin-inline: auto;
     padding-inline: var(--container-padding);
     padding-top: clamp(6.5rem, 11vw, 9.5rem);
@@ -100,35 +96,6 @@ import siteData from "../data/site.json";
     display: flex;
     flex-direction: column;
     flex: 1;
-  }
-
-  /* Eyebrow Pill */
-  .hero-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    padding: 0.4rem 0.95rem;
-    border-radius: var(--pill-radius);
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    width: fit-content;
-    font-size: var(--text-caption);
-    font-weight: 500;
-    color: var(--text-secondary);
-    letter-spacing: -0.01em;
-    margin-bottom: clamp(1.5rem, 2.5vw, 2.25rem);
-  }
-
-  .hero-eyebrow::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #ffffff;
-    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-    flex-shrink: 0;
   }
 
   /* Header Grid */

@@ -35,17 +35,17 @@ function isFeatureIncluded(feature: ComparisonFeature, plan: Plan, index: number
 }
 ---
 
-<div class="block-web-comparison" data-comparison data-reveal>
-  <div class="block-label">
+<div class="block-web-comparison" data-comparison data-reveal data-pricing-comparison>
+  <div class="block-label" data-pricing-comparison-header>
     <span class="block-code">{sectionCode}</span>
     <span class="block-name">{sectionTitle}</span>
   </div>
 
   <!-- Desktop Unified Comparison Canvas (Dynamic Grid) -->
-  <div class="comparison-canvas comparison-desktop">
+  <div class="comparison-canvas comparison-desktop" data-pricing-table>
     <div class="comparison-grid-table">
       <!-- Top Row: Headers & Plan Summaries -->
-      <div class="grid-row grid-header-row">
+      <div class="grid-row grid-header-row" data-pricing-row>
         <!-- Empty Top-Left Header Cell -->
         <div class="grid-cell cell-category-label"></div>
 
@@ -55,9 +55,10 @@ function isFeatureIncluded(feature: ComparisonFeature, plan: Plan, index: number
               class="grid-cell cell-plan-header"
               data-plan-id={plan.id}
               data-featured={plan.isFeatured ? "true" : "false"}
+              {...(plan.isFeatured ? { "data-pricing-featured": "" } : {})}
             >
               {plan.isFeatured && (
-                <span class="plan-floating-badge">Recomendado</span>
+                <span class="plan-floating-badge" data-pricing-recommended>Recomendado</span>
               )}
 
               <h3 class="plan-heading">{plan.name}</h3>
@@ -76,7 +77,7 @@ function isFeatureIncluded(feature: ComparisonFeature, plan: Plan, index: number
       <!-- Feature Rows -->
       {
         comparisonFeatures.map((feature) => (
-          <div class="grid-row grid-feature-row">
+          <div class="grid-row grid-feature-row" data-pricing-row>
             <!-- Concept Label (Centered) -->
             <div class="grid-cell cell-feature-title">
               <span class="feature-text">{feature.name}</span>
@@ -90,6 +91,7 @@ function isFeatureIncluded(feature: ComparisonFeature, plan: Plan, index: number
                     class="grid-cell cell-value"
                     data-plan-id={plan.id}
                     data-featured={plan.isFeatured ? "true" : "false"}
+                    {...(plan.isFeatured ? { "data-pricing-featured": "" } : {})}
                   >
                     {included ? (
                       <span class="lucide-wrap icon-check" aria-label="Incluido">
@@ -111,12 +113,16 @@ function isFeatureIncluded(feature: ComparisonFeature, plan: Plan, index: number
   </div>
 
   <!-- Mobile View: Clean Sequential Composition (No Horizontal Scroll) -->
-  <div class="comparison-mobile">
+  <div class="comparison-mobile" data-pricing-table-mobile>
     {
       plans.map((plan, planIdx) => (
-        <article class="mobile-plan-block" data-featured={plan.isFeatured ? "true" : "false"}>
+        <article
+          class="mobile-plan-block"
+          data-featured={plan.isFeatured ? "true" : "false"}
+          data-pricing-row
+        >
           {plan.isFeatured && (
-            <span class="plan-floating-badge mobile-floating-badge">Recomendado</span>
+            <span class="plan-floating-badge mobile-floating-badge" data-pricing-recommended>Recomendado</span>
           )}
 
           <div class="mobile-plan-header">

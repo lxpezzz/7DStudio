@@ -25,7 +25,6 @@ const steps = [
   <div class="section-container">
     <!-- Header -->
     <div class="process-header">
-      <div class="process-eyebrow">Cómo trabajamos</div>
       <h2 class="process-h2">De la idea a una web lista para trabajar.</h2>
     </div>
 
@@ -51,6 +50,7 @@ const steps = [
   .process-section {
     width: 100%;
     position: relative;
+    padding-top: 0px;
   }
 
   /* Header */
@@ -60,25 +60,6 @@ const steps = [
     margin-bottom: clamp(2rem, 4vw, 3rem);
   }
 
-  .process-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    font-size: var(--text-caption);
-    font-weight: 600;
-    color: var(--text-light-secondary);
-    letter-spacing: -0.01em;
-    margin-bottom: 1rem;
-  }
-
-  .process-eyebrow::before {
-    content: "";
-    width: 5.5px;
-    height: 5.5px;
-    border-radius: 50%;
-    background-color: var(--text-light-primary);
-    flex-shrink: 0;
-  }
 
   .process-h2 {
     font-size: clamp(1.85rem, 3.2vw, 2.75rem);

@@ -1,16 +1,14 @@
 ---
-import '../styles/global.css';
-import siteData from '../data/site.json';
+import "../styles/global.css";
+import siteData from "../data/site.json";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { 
-  title = siteData.title, 
-  description = siteData.description 
-} = Astro.props;
+const { title = siteData.title, description = siteData.description } =
+  Astro.props;
 ---
 
 <!doctype html>
@@ -36,9 +34,9 @@ const {
     <!-- Google Fonts: Plus Jakarta Sans for pristine editorial typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link 
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" 
-      rel="stylesheet" 
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
     />
 
     <title>{title}</title>

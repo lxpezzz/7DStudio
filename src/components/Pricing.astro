@@ -2,26 +2,21 @@
 import pricingData from "../data/pricing.json";
 import PricingComparison from "./pricing/PricingComparison.astro";
 import ProductCard from "./pricing/ProductCard.astro";
-import PricingCTA from "./pricing/PricingCTA.astro";
 
-const { header, webServices, physicalProducts, cta } = pricingData;
+const { header, webServices, physicalProducts } = pricingData;
 ---
 
 <section class="pricing-solutions-section" id="precios" data-pricing>
   <div class="section-container">
     <!-- Header de sección -->
-    <header class="section-header" data-reveal>
-      <div class="section-eyebrow">
-        <span class="eyebrow-dot" aria-hidden="true"></span>
-        <span>{header.eyebrow}</span>
-      </div>
+    <header class="section-header" data-reveal data-pricing-header>
 
       <div class="header-content-grid">
-        <h2 class="section-title">
+        <h2 class="section-title" data-pricing-title>
           {header.title}
         </h2>
 
-        <p class="section-subtitle">
+        <p class="section-subtitle" data-pricing-desc>
           {header.description}
         </p>
       </div>
@@ -36,19 +31,21 @@ const { header, webServices, physicalProducts, cta } = pricingData;
     />
 
     <!-- Bloque 02 — Productos Físicos -->
-    <div class="block-physical-products" data-reveal>
-      <div class="block-label">
+    <div class="block-physical-products" data-reveal data-pricing-physical>
+      <div class="block-label" data-pricing-physical-header>
         <span class="block-code">{physicalProducts.sectionCode}</span>
         <span class="block-name">{physicalProducts.sectionTitle}</span>
       </div>
 
       {
         physicalProducts.subtitle && (
-          <p class="physical-block-subtitle">{physicalProducts.subtitle}</p>
+          <p class="physical-block-subtitle" data-pricing-physical-sub>
+            {physicalProducts.subtitle}
+          </p>
         )
       }
 
-      <div class="physical-grid">
+      <div class="physical-grid" data-pricing-grid>
         {
           physicalProducts.products.map((product) => (
             <ProductCard product={product} />
@@ -57,13 +54,6 @@ const { header, webServices, physicalProducts, cta } = pricingData;
       </div>
     </div>
 
-    <!-- CTA Final -->
-    <PricingCTA
-      title={cta.title}
-      description={cta.description}
-      buttonLabel={cta.buttonLabel}
-      buttonHref={cta.buttonHref}
-    />
   </div>
 </section>
 
@@ -71,8 +61,8 @@ const { header, webServices, physicalProducts, cta } = pricingData;
   .pricing-solutions-section {
     width: 100%;
     position: relative;
-    padding-block: clamp(4.5rem, 8vw, 8.5rem);
     background-color: var(--bg-page);
+    padding-top: var(--section-space-sm);
   }
 
   /* Header de Sección */
@@ -81,25 +71,6 @@ const { header, webServices, physicalProducts, cta } = pricingData;
     flex-direction: column;
     width: 100%;
     margin-bottom: clamp(3.5rem, 6vw, 5.5rem);
-  }
-
-  .section-eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: var(--text-caption);
-    font-weight: 600;
-    color: var(--text-light-secondary);
-    letter-spacing: -0.01em;
-    margin-bottom: 1.25rem;
-  }
-
-  .eyebrow-dot {
-    width: 5.5px;
-    height: 5.5px;
-    border-radius: 50%;
-    background-color: var(--text-light-primary);
-    flex-shrink: 0;
   }
 
   .header-content-grid {

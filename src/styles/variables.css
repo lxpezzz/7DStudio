@@ -31,12 +31,17 @@
   --canvas-radius: clamp(18px, 2.5vw, 32px);
   --pill-radius: 9999px;
 
-  --container-hero: 1800px;
-  --container-content: 1220px;
+  --container-hero: 2000px;
+  --container-content: 1200px;
   --container-padding: clamp(1.25rem, 3vw, 2.5rem);
 
   /* Transitions */
   --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
   --duration-quick: 180ms;
   --duration-smooth: 320ms;
+
+  /* Sections */
+  --section-space-sm: clamp(1.5rem, 2.5vw, 2.5rem);
+  --section-space-md: clamp(2rem, 3.5vw, 3.5rem);
+  --section-space-lg: clamp(3rem, 5vw, 5rem);
 }

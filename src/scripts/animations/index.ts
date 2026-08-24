@@ -8,6 +8,7 @@ import { initDifferentiators } from "./differentiators";
 import { initSolutions } from "./solutions";
 import { initProductLoop } from "./product-loop";
 import { initHeader } from "./header";
+import { initPricing } from "./pricing";
 
 export function initApp() {
   if (typeof window === "undefined") return;
@@ -24,6 +25,7 @@ export function initApp() {
   initDifferentiators();
   initBrandAnimation();
   initCustomization();
+  initPricing();
   // 3. Recalculate ScrollTrigger triggers after layout is painted
   requestAnimationFrame(() => {
     ScrollTrigger.refresh();

@@ -1,6 +1,5 @@
 {
   "header": {
-    "eyebrow": "Soluciones",
     "title": "Elige la presencia digital que necesita tu negocio.",
     "description": "Desde una landing enfocada en conversión hasta una presencia completa preparada para crecer."
   },
@@ -80,7 +79,7 @@
         "customization": [
           "Logo",
           "Colores de marca",
-          "QR dinámico",
+          "QR personalizado",
           "Google Reviews",
           "Redes sociales"
         ],
@@ -94,10 +93,10 @@
         "price": "Desde 15€",
         "tax": "+ IVA",
         "customization": [
-          "Diseño corporativo",
+          "Diseño personalizado",
           "Perfil digital",
           "Contacto",
-          "Redes"
+          "Tecnología NFC"
         ],
         "imageKey": "tarjetas"
       },

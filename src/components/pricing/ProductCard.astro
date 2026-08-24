@@ -42,7 +42,13 @@ const productIcons: Record<string, IconNode> = {
 const productIcon = product.icon ? productIcons[product.icon] : undefined;
 ---
 
-<article class="physical-card" id={`producto-${product.num}`} data-card data-product={product.num}>
+<article
+  class="physical-card"
+  id={`producto-${product.num}`}
+  data-card
+  data-product={product.num}
+  data-pricing-card
+>
   <!-- Product Preview Visual Stage -->
   <div class="physical-visual-wrap">
     {
@@ -76,7 +82,11 @@ const productIcon = product.icon ? productIcons[product.icon] : undefined;
       </div>
 
       <div class="physical-card-price">
-        {product.pricePrefix && <span class="price-prefix">{product.pricePrefix}</span>}
+        {
+          product.pricePrefix && (
+            <span class="price-prefix">{product.pricePrefix}</span>
+          )
+        }
         <span class="price-val">{product.price}</span>
         <span class="price-tax">{product.tax}</span>
       </div>
@@ -111,8 +121,19 @@ const productIcon = product.icon ? productIcons[product.icon] : undefined;
     transition: border-color var(--duration-smooth) var(--ease-default);
   }
 
-  .physical-card:hover {
-    border-color: rgba(10, 10, 10, 0.18);
+  @media (hover: hover) and (pointer: fine) {
+    .physical-card:hover {
+      border-color: rgba(10, 10, 10, 0.16);
+    }
+
+    .physical-card:hover .physical-product-img {
+      transform: scale(1.02);
+    }
+
+    .physical-card:hover .product-subtle-icon {
+      transform: translateY(-1px);
+      opacity: 0.9;
+    }
   }
 
   .physical-visual-wrap {
@@ -130,10 +151,6 @@ const productIcon = product.icon ? productIcons[product.icon] : undefined;
     display: block;
     user-select: none;
     transition: transform var(--duration-smooth) var(--ease-default);
-  }
-
-  .physical-card:hover .physical-product-img {
-    transform: scale(1.025);
   }
 
   .physical-card-num {
@@ -155,6 +172,8 @@ const productIcon = product.icon ? productIcons[product.icon] : undefined;
   .physical-card-body {
     display: flex;
     flex-direction: column;
+    text-align: center;
+    align-items: center;
     padding: clamp(1.25rem, 2vw, 1.75rem);
     gap: 0.65rem;
     flex: 1 1 auto;
@@ -164,6 +183,8 @@ const productIcon = product.icon ? productIcons[product.icon] : undefined;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+    text-align: center;
+    align-items: center;
   }
 
   .title-with-icon {
@@ -248,9 +269,10 @@ const productIcon = product.icon ? productIcons[product.icon] : undefined;
 
   .customization-item {
     display: inline-flex;
+    text-align: center;
     align-items: center;
     gap: 0.35rem;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     color: var(--text-light-primary);
     font-weight: 500;
   }
