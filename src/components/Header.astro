@@ -10,8 +10,8 @@ import siteData from "../data/site.json";
         src="/images/7dstudio-logo.svg"
         alt="7DStudio"
         class="brand-logo"
-        width="120"
-        height="32"
+        width="150"
+        height="100"
       />
     </a>
 
@@ -20,6 +20,26 @@ import siteData from "../data/site.json";
       {
         siteData.nav.map((item) => (
           <a href={item.href}>
+            {item.label === "Productos" && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-star-plus-icon lucide-star-plus"
+              >
+                <>
+                  <path d="M11.013 18.582 6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.12 2.12 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.12 2.12 0 0 0 1.597-1.16l2.309-4.679a.53.53 0 0 1 .95 0l2.31 4.679a2.12 2.12 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904L20 11.5" />
+                  <path d="M15 18h6" />
+                  <path d="M18 15v6" />
+                </>
+              </svg>
+            )}
             {item.label === "Demos" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,16 +58,15 @@ import siteData from "../data/site.json";
                 <path d="M2 12h20A10 10 0 1 1 12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 4-10" />
               </svg>
             )}
-            {item.label}
             {item.label === "Precios" && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
+                stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 class="lucide lucide-dollar-sign-icon lucide-dollar-sign"
@@ -57,6 +76,65 @@ import siteData from "../data/site.json";
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
               </svg>
             )}
+            {item.label === "Metodología" && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-repeat-icon lucide-repeat"
+              >
+                <path d="m17 2 4 4-4 4" />
+                <path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+                <path d="m7 22-4-4 4-4" />
+                <path d="M21 13v1a4 4 0 0 1-4 4H3" />
+              </svg>
+            )}
+            {item.label === "FAQ" && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-circle-question-mark-icon lucide-circle-question-mark"
+              >
+                <>
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+                  <path d="M12 17h.01" />
+                </>
+              </svg>
+            )}
+            {item.label === "Contacto" && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-user-search-icon lucide-user-search"
+              >
+                <circle cx="10" cy="7" r="4" />
+                <path d="M10.3 15H7a4 4 0 0 0-4 4v2" />
+                <circle cx="17" cy="17" r="3" />
+                <path d="m21 21-1.9-1.9" />
+              </svg>
+            )}
+            {item.label}
           </a>
         ))
       }
@@ -183,18 +261,17 @@ import siteData from "../data/site.json";
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 42px;
-    padding: 0 16px;
-    flex-shrink: 0;
+    height: 40px;
+    padding: 16px;
+    padding-block: 2px;
   }
 
   .brand-logo {
     display: block;
     width: auto;
-    height: 20px;
+    height: 40px;
     max-width: 120px;
     object-fit: contain;
-    transition: filter var(--duration-smooth) var(--ease-default);
   }
 
   /* Desktop Navigation */
@@ -212,7 +289,7 @@ import siteData from "../data/site.json";
     padding: 8px 15px;
     border-radius: var(--pill-radius);
     font-size: var(--text-caption);
-    font-weight: 500;
+    font-weight: 700;
     transition:
       color var(--duration-quick) var(--ease-default),
       background-color var(--duration-quick) var(--ease-default);

@@ -40,5 +40,11 @@
     "secondaryCta": "Explorar productos",
     "metaLocation": "Castellón, Remoto",
     "metaStatus": "Disponible para nuevos proyectos"
+  },
+  "finalCta": {
+    "title": "¿Creamos algo que destaque?",
+    "description": "Desde una página web hasta una solución digital completa para conectar tu negocio con tus clientes.",
+    "buttonLabel": "Hablar del proyecto",
+    "buttonHref": "#contacto"
   }
 }

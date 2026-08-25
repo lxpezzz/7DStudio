@@ -1,0 +1,330 @@
+---
+import { Image } from "astro:assets";
+import { ArrowRight } from "lucide";
+import LucideIcon from "./pricing/LucideIcon.astro";
+import ctaImage from "../assets/images/brand/final-cta.webp";
+import siteData from "../data/site.json";
+
+interface Props {
+  title?: string;
+  description?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
+}
+
+const {
+  title = siteData.finalCta?.title ?? "¿Creamos algo que destaque?",
+  description = siteData.finalCta?.description ??
+    "Desde una página web hasta una solución digital completa para conectar tu negocio con tus clientes.",
+  buttonLabel = siteData.finalCta?.buttonLabel ?? "Hablar del proyecto",
+  buttonHref = siteData.finalCta?.buttonHref ?? "#contacto",
+} = Astro.props;
+---
+
+<section
+  class="final-cta-section"
+  id="contacto"
+  data-final-cta
+  data-header-theme="light"
+  aria-labelledby="finalCtaTitle"
+>
+  <div class="canvas-container final-cta-canvas" data-cta-canvas>
+    <!-- Protagonist Background Image Layer -->
+    <div class="final-cta-bg" aria-hidden="true">
+      <Image
+        src={ctaImage}
+        alt="Espacio de trabajo 7DStudio con portátil exhibiendo diseño web, expositor QR y tarjetas corporativas"
+        class="final-cta-image"
+        width={1920}
+        height={1080}
+        loading="lazy"
+        fetchpriority="auto"
+      />
+      <!-- Soft Editorial Dark Overlay for WCAG AAA Readability -->
+      <div class="final-cta-overlay"></div>
+    </div>
+
+    <!-- Editorial Content Stage (Directly on image, no card wrapper) -->
+    <div class="final-cta-content" data-cta-content>
+      <div class="final-cta-editorial-col">
+        <h2 class="final-cta-title" id="finalCtaTitle" data-cta-title>
+          {title}
+        </h2>
+
+        <p class="final-cta-desc" data-cta-desc>
+          {description}
+        </p>
+
+        <div class="final-cta-actions" data-cta-actions>
+          <a
+            href={buttonHref}
+            class="final-cta-btn"
+            data-cta-btn
+            aria-label={`${buttonLabel} — Iniciar conversación de proyecto`}
+          >
+            <span class="btn-text">{buttonLabel}</span>
+            <span class="btn-icon-wrapper" aria-hidden="true">
+              <LucideIcon icon={ArrowRight} size={15} strokeWidth={2} />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     Final CTA Section Shell
+     ========================================================================== */
+  .final-cta-section {
+    width: 100%;
+    position: relative;
+    background-color: var(--bg-page);
+    padding-bottom: var(--section-space-sm);
+  }
+
+  .final-cta-canvas {
+    position: relative;
+    width: 100%;
+    max-width: var(--container-hero);
+    min-height: clamp(550px, 58vh, 650px);
+    margin-inline: auto;
+    border-radius: var(--canvas-radius);
+    border: 1px solid var(--border-subtle);
+    background-color: var(--bg-canvas-dark);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  /* ==========================================================================
+     Background Protagonist Image & Editorial Overlay
+     ========================================================================== */
+  .final-cta-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .final-cta-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    display: block;
+    user-select: none;
+  }
+
+  .final-cta-overlay {
+    position: absolute;
+    inset: 0;
+    /* Rich directional gradient: deep dark on left for text contrast, open on right for products */
+    background:
+      linear-gradient(
+        90deg,
+        rgba(8, 9, 12, 0.94) 0%,
+        rgba(8, 9, 12, 0.88) 32%,
+        rgba(8, 9, 12, 0.52) 60%,
+        rgba(8, 9, 12, 0.2) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(8, 9, 12, 0.3) 0%,
+        transparent 30%,
+        transparent 70%,
+        rgba(8, 9, 12, 0.45) 100%
+      );
+  }
+
+  /* ==========================================================================
+     Editorial Content Layer
+     ========================================================================== */
+  .final-cta-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: var(--container-hero);
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+    padding-block: clamp(3rem, 6vw, 5rem);
+    display: flex;
+    align-items: center;
+  }
+
+  .final-cta-editorial-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: min(100%, 620px);
+  }
+
+  .final-cta-title {
+    font-size: clamp(2.2rem, 4.4vw, 3.85rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: var(--tracking-tightest);
+    color: #ffffff;
+    margin-bottom: clamp(1rem, 1.8vw, 1.35rem);
+    text-wrap: balance;
+  }
+
+  .final-cta-desc {
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-relaxed);
+    color: rgba(255, 255, 255, 0.76);
+    font-weight: 400;
+    max-width: 44ch;
+    margin-bottom: clamp(1.75rem, 3.2vw, 2.5rem);
+    text-wrap: pretty;
+  }
+
+  .final-cta-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  /* ==========================================================================
+     High-Contrast Island CTA Button
+     ========================================================================== */
+  .final-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    height: 52px;
+    padding-left: 1.6rem;
+    padding-right: 0.6rem;
+    border-radius: var(--pill-radius);
+    background-color: #ffffff;
+    color: #08080a;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    box-shadow:
+      0 4px 20px rgba(0, 0, 0, 0.28),
+      0 0 0 1px rgba(255, 255, 255, 0.24);
+    transition:
+      transform var(--duration-smooth) var(--ease-default),
+      background-color var(--duration-smooth) var(--ease-default),
+      box-shadow var(--duration-smooth) var(--ease-default);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .final-cta-btn:hover {
+    background-color: #f3f3f3;
+    transform: translateY(-2px);
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.38),
+      0 0 0 1px rgba(255, 255, 255, 0.35);
+  }
+
+  .final-cta-btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-text {
+    white-space: nowrap;
+  }
+
+  .btn-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(8, 8, 10, 0.08);
+    color: #08080a;
+    flex-shrink: 0;
+    transition:
+      transform var(--duration-quick) var(--ease-default),
+      background-color var(--duration-quick) var(--ease-default);
+  }
+
+  .final-cta-btn:hover .btn-icon-wrapper {
+    transform: translateX(3px);
+    background-color: rgba(8, 8, 10, 0.12);
+  }
+
+  /* ==========================================================================
+     Responsive Refinement
+     ========================================================================== */
+  @media (max-width: 1024px) {
+    .final-cta-canvas {
+      min-height: clamp(500px, 54vh, 600px);
+    }
+
+    .final-cta-image {
+      object-position: 75% center;
+    }
+
+    .final-cta-editorial-col {
+      max-width: min(100%, 540px);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .final-cta-canvas {
+      min-height: clamp(450px, 68vh, 540px);
+      align-items: flex-end;
+    }
+
+    .final-cta-image {
+      object-position: 68% center;
+    }
+
+    .final-cta-overlay {
+      background:
+        linear-gradient(
+          180deg,
+          rgba(8, 9, 12, 0.45) 0%,
+          rgba(8, 9, 12, 0.82) 42%,
+          rgba(8, 9, 12, 0.96) 100%
+        ),
+        linear-gradient(
+          90deg,
+          rgba(8, 9, 12, 0.65) 0%,
+          rgba(8, 9, 12, 0.35) 100%
+        );
+    }
+
+    .final-cta-content {
+      padding-block: clamp(2rem, 5vw, 3rem);
+    }
+
+    .final-cta-actions {
+      width: 100%;
+    }
+
+    .final-cta-btn {
+      width: 100%;
+      justify-content: space-between;
+      height: 50px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .final-cta-title {
+      font-size: 1.95rem;
+    }
+
+    .final-cta-btn {
+      padding-left: 1.25rem;
+    }
+  }
+
+  /* ==========================================================================
+     Accessibility: Reduced Motion
+     ========================================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    .final-cta-btn,
+    .btn-icon-wrapper {
+      transition: none !important;
+    }
+  }
+</style>
