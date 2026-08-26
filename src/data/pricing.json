@@ -117,9 +117,9 @@
     ]
   },
   "cta": {
-    "title": "¿Tienes una idea diferente?",
-    "description": "Creamos una solución adaptada a tu negocio.",
-    "buttonLabel": "Hablar del proyecto",
-    "buttonHref": "#contacto"
+    "title": "¿Tienes un producto en mente?",
+    "description": "Cuéntanos qué necesitas y creamos una solución personalizada para tu negocio.",
+    "buttonLabel": "Cuéntanos tu idea",
+    "buttonHref": "/#contacto"
   }
 }

@@ -3,7 +3,6 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Hero from "../components/Hero.astro";
 import ProductLoop from "../components/ProductLoop.astro";
-import VisualProducts from "../components/VisualProducts.astro";
 import Process from "../components/Process.astro";
 import Prototypes from "../components/Prototypes.astro";
 import Differentiators from "../components/Differentiators.astro";
@@ -12,14 +11,17 @@ import Customization from "../components/Customization.astro";
 import Pricing from "../components/Pricing.astro";
 import FAQ from "../components/FAQ.astro";
 import FinalCTA from "../components/FinalCTA.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import Marquee from "../components/Marquee.astro";
 ---
 
 <Layout>
   <Header />
   <div class="hero-main">
     <Hero />
+    <Marquee />
     <ProductLoop />
-    <VisualProducts />
     <Process />
     <div class="prototypes-criteria-canvas">
       <Prototypes />
@@ -30,6 +32,8 @@ import FinalCTA from "../components/FinalCTA.astro";
     <Pricing />
     <FAQ />
     <FinalCTA />
+    <Contact />
+    <Footer />
   </div>
 </Layout>
 

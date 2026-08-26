@@ -2,8 +2,9 @@
 import pricingData from "../data/pricing.json";
 import PricingComparison from "./pricing/PricingComparison.astro";
 import ProductCard from "./pricing/ProductCard.astro";
+import PricingCTA from "./pricing/PricingCTA.astro";
 
-const { header, webServices, physicalProducts } = pricingData;
+const { header, webServices, physicalProducts, cta } = pricingData;
 ---
 
 <section class="pricing-solutions-section" id="precios" data-pricing data-header-theme="dark">
@@ -52,6 +53,13 @@ const { header, webServices, physicalProducts } = pricingData;
           ))
         }
       </div>
+
+      <PricingCTA
+        title={cta?.title}
+        description={cta?.description}
+        buttonLabel={cta?.buttonLabel}
+        buttonHref={cta?.buttonHref}
+      />
     </div>
 
   </div>

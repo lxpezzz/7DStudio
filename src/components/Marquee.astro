@@ -1,0 +1,134 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+
+const phrases = [
+  "WEB A MEDIDA",
+  "PRODUCTOS FÍSICOS",
+  "EXPERIENCIAS DIGITALES",
+];
+
+// Repeat phrase set to ensure each group spans comfortably across ultra-wide viewports
+const repeatCount = 3;
+const sequence = Array.from({ length: repeatCount }, () => phrases).flat();
+---
+
+<div
+  class:list={["marquee-container", className]}
+  data-header-theme="dark"
+  role="region"
+  aria-label="Especialidades de 7DStudio"
+>
+  <div class="marquee-track">
+    <!-- Group 1: Primary accessible content -->
+    <div class="marquee-group">
+      {
+        sequence.map((text) => (
+          <span class="marquee-item">
+            <span class="marquee-text">{text}</span>
+            <span class="marquee-dot" aria-hidden="true">
+              ·
+            </span>
+          </span>
+        ))
+      }
+    </div>
+
+    <!-- Group 2: Decorative duplicate for infinite seamless loop -->
+    <div class="marquee-group" aria-hidden="true">
+      {
+        sequence.map((text) => (
+          <span class="marquee-item">
+            <span class="marquee-text">{text}</span>
+            <span class="marquee-dot" aria-hidden="true">
+              ·
+            </span>
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .marquee-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--bg-canvas-dark);
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    height: clamp(56px, 6vw, 84px);
+    display: flex;
+    align-items: center;
+    user-select: none;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+  }
+
+  .marquee-group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    animation: marqueeScroll 28s linear infinite;
+  }
+
+  .marquee-item {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .marquee-text {
+    font-family: var(--font-sans);
+    font-size: clamp(1.15rem, 2.2vw, 2.1rem);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .marquee-dot {
+    font-size: clamp(1.15rem, 2.2vw, 2.1rem);
+    color: var(--text-muted);
+    padding-inline: clamp(1.25rem, 2.5vw, 2.75rem);
+    line-height: 1;
+  }
+
+  @keyframes marqueeScroll {
+    0% {
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-container {
+      overflow-x: auto;
+      justify-content: center;
+    }
+
+    .marquee-track {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .marquee-group {
+      animation: none !important;
+    }
+
+    .marquee-group[aria-hidden="true"] {
+      display: none;
+    }
+  }
+</style>

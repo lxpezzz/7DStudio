@@ -37,7 +37,7 @@ const imagesMap: Record<string, ImageMetadata> = {
 
           <!-- Studio CTA Attached Below Description -->
           <div class="editorial-action">
-            <a href="#contacto" class="editorial-cta-btn">
+            <a href="/#contacto" class="editorial-cta-btn">
               <span>Hablemos</span>
               <span class="cta-arrow" aria-hidden="true">
                 <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
@@ -370,27 +370,10 @@ const imagesMap: Record<string, ImageMetadata> = {
     will-change: transform;
   }
 
-  .indicator-btn.is-active .progress-fill {
-    animation: barProgress var(--autoplay-duration, 4500ms) linear forwards;
-  }
-
-  .product-twin-grid.is-paused .indicator-btn.is-active .progress-fill {
-    animation-play-state: paused;
-  }
-
-  @keyframes barProgress {
-    from {
-      transform: scaleX(0);
-    }
-    to {
-      transform: scaleX(1);
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .indicator-btn.is-active .progress-fill {
-      animation: none !important;
+    .progress-fill {
       transform: scaleX(1) !important;
+      will-change: auto;
     }
   }
 </style>

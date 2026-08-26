@@ -1,3 +1,4 @@
+import { gsap } from "../gsap";
 import { prefersReducedMotion } from "../motion";
 
 export function initProductLoop() {
@@ -9,11 +10,52 @@ export function initProductLoop() {
   const indicatorBtns =
     loopRoot.querySelectorAll<HTMLButtonElement>(".indicator-btn");
 
+  if (textSlides.length === 0 || visualSlides.length === 0) return;
+
   let currentIndex = 0;
-  const AUTOPLAY_DURATION = 4500;
+  let progressTween: gsap.core.Tween | null = null;
+  let isPaused = false;
+  const AUTOPLAY_DURATION = 4.5;
   const reduceMotion = prefersReducedMotion();
 
-  loopRoot.style.setProperty("--autoplay-duration", `${AUTOPLAY_DURATION}ms`);
+  function startProgress() {
+    if (progressTween) {
+      progressTween.kill();
+      progressTween = null;
+    }
+
+    // Reset all progress fills
+    indicatorBtns.forEach((btn, i) => {
+      const fill = btn.querySelector<HTMLElement>(".progress-fill");
+      if (fill) {
+        gsap.set(fill, { scaleX: i === currentIndex && reduceMotion ? 1 : 0 });
+      }
+    });
+
+    if (reduceMotion || indicatorBtns.length <= 1) return;
+
+    const currentBtn = indicatorBtns[currentIndex];
+    const currentFill = currentBtn?.querySelector<HTMLElement>(".progress-fill");
+
+    if (currentFill) {
+      progressTween = gsap.fromTo(
+        currentFill,
+        { scaleX: 0 },
+        {
+          scaleX: 1,
+          duration: AUTOPLAY_DURATION,
+          ease: "none",
+          onComplete: () => {
+            nextSlide();
+          },
+        },
+      );
+
+      if (isPaused) {
+        progressTween.pause();
+      }
+    }
+  }
 
   function setSlide(index: number) {
     currentIndex = index;
@@ -32,21 +74,11 @@ export function initProductLoop() {
 
     indicatorBtns.forEach((btn, i) => {
       const active = i === index;
-      const fill = btn.querySelector<HTMLElement>(".progress-fill");
-
-      btn.classList.remove("is-active");
+      btn.classList.toggle("is-active", active);
       btn.setAttribute("aria-selected", String(active));
-
-      if (fill) {
-        fill.style.animation = "none";
-        void fill.offsetWidth; // Trigger reflow to restart css animation
-        fill.style.animation = "";
-      }
-
-      if (active) {
-        btn.classList.add("is-active");
-      }
     });
+
+    startProgress();
   }
 
   function nextSlide() {
@@ -55,26 +87,31 @@ export function initProductLoop() {
   }
 
   indicatorBtns.forEach((btn, idx) => {
-    const fill = btn.querySelector(".progress-fill");
-    fill?.addEventListener("animationend", () => {
-      if (btn.classList.contains("is-active") && !reduceMotion) {
-        nextSlide();
-      }
-    });
-
     btn.addEventListener("click", () => {
       setSlide(idx);
     });
   });
 
-  const setPaused = (paused: boolean) => {
-    loopRoot.classList.toggle("is-paused", paused);
+  const pauseLoop = () => {
+    isPaused = true;
+    if (progressTween) progressTween.pause();
+    loopRoot.classList.add("is-paused");
   };
 
-  loopRoot.addEventListener("mouseenter", () => setPaused(true));
-  loopRoot.addEventListener("mouseleave", () => setPaused(false));
-  loopRoot.addEventListener("focusin", () => setPaused(true));
-  loopRoot.addEventListener("focusout", () => setPaused(false));
+  const resumeLoop = () => {
+    isPaused = false;
+    if (progressTween) progressTween.resume();
+    loopRoot.classList.remove("is-paused");
+  };
+
+  loopRoot.addEventListener("mouseenter", pauseLoop);
+  loopRoot.addEventListener("mouseleave", resumeLoop);
+  loopRoot.addEventListener("focusin", pauseLoop);
+  loopRoot.addEventListener("focusout", (e) => {
+    if (!loopRoot.contains(e.relatedTarget as Node | null)) {
+      resumeLoop();
+    }
+  });
 
   setSlide(0);
 }

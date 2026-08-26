@@ -5,15 +5,19 @@ export function initHeroAnimation() {
   const hero = document.getElementById("hero");
   if (!hero) return;
 
-  const eyebrow = hero.querySelector(".hero-eyebrow");
   const titleLead = hero.querySelector(".title-lead");
   const titleSub = hero.querySelector(".title-sub");
   const desc = hero.querySelector(".hero-description");
   const actions = hero.querySelectorAll(".hero-actions > *");
   const footer = hero.querySelector(".hero-footer-bar");
+  const canvas = hero.querySelector(".hero-canvas");
+
+  const validElements = [titleLead, titleSub, desc, ...Array.from(actions), footer].filter(
+    Boolean,
+  ) as HTMLElement[];
 
   if (prefersReducedMotion()) {
-    gsap.set([eyebrow, titleLead, titleSub, desc, actions, footer], {
+    gsap.set(validElements, {
       opacity: 1,
       y: 0,
       clearProps: "all",
@@ -28,39 +32,40 @@ export function initHeroAnimation() {
     },
   });
 
-  if (eyebrow) {
+  if (canvas) {
     tl.fromTo(
-      eyebrow,
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.65 },
-      0.05,
+      canvas,
+      { opacity: 0.8, scale: 0.99 },
+      { opacity: 1, scale: 1, duration: 0.9 },
+      0,
     );
   }
 
-  if (titleLead && titleSub) {
+  if (titleLead || titleSub) {
+    const titles = [titleLead, titleSub].filter(Boolean) as HTMLElement[];
     tl.fromTo(
-      [titleLead, titleSub],
-      { opacity: 0, y: 36 },
-      { opacity: 1, y: 0, stagger: 0.12, duration: 0.9 },
-      0.15,
+      titles,
+      { opacity: 0, y: 32 },
+      { opacity: 1, y: 0, stagger: 0.1, duration: 0.85 },
+      0.1,
     );
   }
 
   if (desc) {
     tl.fromTo(
       desc,
-      { opacity: 0, y: 24 },
-      { opacity: 1, y: 0, duration: 0.8 },
-      0.4,
+      { opacity: 0, y: 22 },
+      { opacity: 1, y: 0, duration: 0.75 },
+      0.35,
     );
   }
 
   if (actions.length > 0) {
     tl.fromTo(
       actions,
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, stagger: 0.08, duration: 0.7 },
-      0.55,
+      { opacity: 0, y: 16 },
+      { opacity: 1, y: 0, stagger: 0.08, duration: 0.65 },
+      0.5,
     );
   }
 
@@ -68,8 +73,8 @@ export function initHeroAnimation() {
     tl.fromTo(
       footer,
       { opacity: 0, y: 14 },
-      { opacity: 1, y: 0, duration: 0.7 },
-      0.7,
+      { opacity: 1, y: 0, duration: 0.65 },
+      0.65,
     );
   }
 }

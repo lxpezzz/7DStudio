@@ -1,69 +1,78 @@
 ---
-import { ArrowRight } from "lucide";
-import LucideIcon from "./LucideIcon.astro";
-
 interface Props {
-  title: string;
-  description: string;
-  buttonLabel: string;
-  buttonHref: string;
+  title?: string;
+  description?: string;
+  buttonLabel?: string;
+  buttonHref?: string;
 }
 
-const { title, description, buttonLabel, buttonHref } = Astro.props;
+const {
+  title = "¿Tienes un producto en mente?",
+  description = "Cuéntanos qué necesitas y creamos una solución personalizada para tu negocio.",
+  buttonLabel = "Cuéntanos tu idea",
+  buttonHref = "/#contacto",
+} = Astro.props;
 ---
 
-<footer class="pricing-cta-footer" data-cta data-reveal data-pricing-cta>
-  <div class="cta-narrative">
-    <h3 class="cta-heading">{title}</h3>
+<div class="physical-cta-banner">
+  <div class="cta-text-group">
+    <h3 class="cta-title">{title}</h3>
     <p class="cta-text">{description}</p>
   </div>
 
-  <div class="cta-action">
-    <a href={buttonHref} class="cta-button" aria-label={`${buttonLabel} con 7DStudio`}>
-      <span>{buttonLabel}</span>
-      <span class="cta-arrow-wrap" aria-hidden="true">
-        <LucideIcon icon={ArrowRight} size={16} strokeWidth={1.5} class="cta-arrow" />
-      </span>
-    </a>
-  </div>
-</footer>
+  <a
+    href={buttonHref}
+    class="cta-button"
+    aria-label={`${buttonLabel} — Contactar con 7DStudio`}
+  >
+    <span>{buttonLabel}</span>
+    <span class="cta-arrow" aria-hidden="true">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
+        <path
+          d="M3.333 8h9.334M8.667 4l4 4-4 4"
+          stroke="currentColor"
+          stroke-width="1.6"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </span>
+  </a>
+</div>
 
 <style>
-  .pricing-cta-footer {
+  .physical-cta-banner {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
-    gap: clamp(1rem, 2vw, 2rem);
-    flex-wrap: wrap;
-    padding-top: clamp(1rem, 2vw, 2rem);
-    border-top: 1px solid var(--border-light-subtle);
+    gap: clamp(1.25rem, 2.5vw, 2.5rem);
+    width: 100%;
+    margin-top: clamp(1rem, 1.8vw, 1.5rem);
+    padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1.5rem, 2.8vw, 2.25rem);
+    background-color: var(--bg-canvas-light);
+    border: 1px solid var(--border-light-subtle);
+    border-radius: var(--canvas-radius);
   }
 
-  .cta-narrative {
+  .cta-text-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    max-width: 48ch;
+    gap: 0.35rem;
+    max-width: 54ch;
   }
 
-  .cta-heading {
-    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  .cta-title {
+    font-size: clamp(1.15rem, 1.5vw, 1.35rem);
     font-weight: 600;
+    line-height: 1.2;
     letter-spacing: var(--tracking-tightest);
     color: var(--text-light-primary);
-    line-height: 1.15;
   }
 
   .cta-text {
-    font-size: var(--text-body);
+    font-size: var(--text-body-sm);
     line-height: var(--leading-relaxed);
     color: var(--text-light-secondary);
     text-wrap: pretty;
-  }
-
-  .cta-action {
-    display: flex;
-    align-items: center;
   }
 
   .cta-button {
@@ -71,28 +80,29 @@ const { title, description, buttonLabel, buttonHref } = Astro.props;
     align-items: center;
     justify-content: center;
     gap: 0.65rem;
-    height: 52px;
-    padding-inline: 2rem;
+    height: 48px;
+    padding-inline: 1.65rem;
     border-radius: var(--pill-radius);
     background-color: var(--text-light-primary);
     color: #ffffff;
     font-size: var(--text-body-sm);
     font-weight: 600;
     letter-spacing: -0.01em;
-    box-shadow: 0 8px 24px -6px rgba(10, 10, 10, 0.18);
+    box-shadow: 0 4px 14px -3px rgba(10, 10, 10, 0.16);
     transition:
       transform var(--duration-smooth) var(--ease-default),
       background-color var(--duration-smooth) var(--ease-default),
       box-shadow var(--duration-smooth) var(--ease-default);
     white-space: nowrap;
     text-decoration: none;
+    flex-shrink: 0;
   }
 
   @media (hover: hover) and (pointer: fine) {
     .cta-button:hover {
       background-color: #232730;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 32px -8px rgba(10, 10, 10, 0.28);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px -4px rgba(10, 10, 10, 0.24);
     }
 
     .cta-button:hover .cta-arrow {
@@ -104,17 +114,26 @@ const { title, description, buttonLabel, buttonHref } = Astro.props;
     transform: scale(0.98);
   }
 
-  .cta-arrow-wrap {
+  .cta-arrow {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-  }
-
-  .cta-arrow {
     transition: transform var(--duration-quick) var(--ease-default);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 768px) {
+    .physical-cta-banner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.25rem;
+      padding: 1.35rem 1.25rem;
+    }
+
+    .cta-text-group {
+      max-width: 100%;
+      gap: 0.35rem;
+    }
+
     .cta-button {
       width: 100%;
     }
@@ -124,6 +143,7 @@ const { title, description, buttonLabel, buttonHref } = Astro.props;
     .cta-button,
     .cta-arrow {
       transition: none !important;
+      transform: none !important;
     }
   }
 </style>

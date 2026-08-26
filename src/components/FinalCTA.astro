@@ -17,13 +17,13 @@ const {
   description = siteData.finalCta?.description ??
     "Desde una página web hasta una solución digital completa para conectar tu negocio con tus clientes.",
   buttonLabel = siteData.finalCta?.buttonLabel ?? "Hablar del proyecto",
-  buttonHref = siteData.finalCta?.buttonHref ?? "#contacto",
+  buttonHref = siteData.finalCta?.buttonHref ?? "/#contacto",
 } = Astro.props;
 ---
 
 <section
   class="final-cta-section"
-  id="contacto"
+  id="final-cta"
   data-final-cta
   data-header-theme="light"
   aria-labelledby="finalCtaTitle"

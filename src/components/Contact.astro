@@ -1,0 +1,488 @@
+---
+import { Mail, ArrowRight } from "lucide";
+import LucideIcon from "./pricing/LucideIcon.astro";
+---
+
+<section
+  class="contact-section"
+  id="contacto"
+  data-contact
+  data-header-theme="dark"
+  aria-labelledby="contactTitle"
+>
+  <div class="section-container">
+    <div class="contact-grid">
+      <!-- Left Column: Narrative & Direct Channels -->
+      <div class="contact-editorial" data-contact-info>
+        <header class="contact-header">
+          <h2 class="contact-title" id="contactTitle">Hablemos.</h2>
+          <p class="contact-desc">
+            Cuéntanos qué necesitas y te ayudamos a encontrar la solución que
+            mejor encaje con tu negocio.
+          </p>
+        </header>
+
+        <!-- Direct Contact Channels -->
+        <div class="contact-channels" aria-label="Canales de contacto directo">
+          <a
+            href="https://wa.me/34600000000"
+            class="channel-row"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Contactar por WhatsApp — Abrir chat"
+          >
+            <div class="channel-identity">
+              <span class="channel-icon-wrap" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21"></path>
+                  <path
+                    d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1"
+                  ></path>
+                </svg>
+              </span>
+              <span class="channel-name">WhatsApp</span>
+            </div>
+            <span class="channel-link">
+              <span>Escribir</span>
+              <span class="channel-arrow" aria-hidden="true">→</span>
+            </span>
+          </a>
+
+          <a
+            href="mailto:hola@7dstudio.es"
+            class="channel-row"
+            aria-label="Contactar por Email — Enviar correo a hola@7dstudio.es"
+          >
+            <div class="channel-identity">
+              <span class="channel-icon-wrap" aria-hidden="true">
+                <LucideIcon icon={Mail} size={16} strokeWidth={1.6} />
+              </span>
+              <span class="channel-name">Email</span>
+            </div>
+            <span class="channel-link">
+              <span>hola@7dstudio.es</span>
+              <span class="channel-arrow" aria-hidden="true">→</span>
+            </span>
+          </a>
+
+          <a
+            href="https://instagram.com/7dstudio"
+            class="channel-row"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Perfil de Instagram de 7DStudio"
+          >
+            <div class="channel-identity">
+              <span class="channel-icon-wrap" aria-hidden="true">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                  ></path>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                </svg>
+              </span>
+              <span class="channel-name">Instagram</span>
+            </div>
+            <span class="channel-link">
+              <span>@7dstudio</span>
+              <span class="channel-arrow" aria-hidden="true">→</span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Lightweight Functional Form -->
+      <div class="contact-form-card" data-contact-form>
+        <form class="contact-form" id="contactForm" method="POST">
+          <!-- Row 1: Nombre & Empresa -->
+          <div class="form-row-duo">
+            <div class="form-field">
+              <label for="contact-name" class="field-label">
+                Nombre <span class="required-mark" aria-hidden="true">*</span>
+              </label>
+              <input
+                type="text"
+                id="contact-name"
+                name="name"
+                class="field-input"
+                placeholder="Tu nombre"
+                required
+                autocomplete="name"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="contact-company" class="field-label">
+                Empresa <span class="optional-mark">(opcional)</span>
+              </label>
+              <input
+                type="text"
+                id="contact-company"
+                name="company"
+                class="field-input"
+                placeholder="Tu marca o negocio"
+                autocomplete="organization"
+              />
+            </div>
+          </div>
+
+          <!-- Row 2: Email o teléfono -->
+          <div class="form-field">
+            <label for="contact-info" class="field-label">
+              Email o teléfono <span class="required-mark" aria-hidden="true"
+                >*</span
+              >
+            </label>
+            <input
+              type="text"
+              id="contact-info"
+              name="contact"
+              class="field-input"
+              placeholder="tu@email.com o +34 600..."
+              required
+            />
+          </div>
+
+          <!-- Row 3: Mensaje -->
+          <div class="form-field">
+            <label for="contact-message" class="field-label">Mensaje</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="4"
+              class="field-input field-textarea"
+              placeholder="Cuéntanos brevemente qué tienes en mente..."
+            ></textarea>
+          </div>
+
+          <!-- Actions -->
+          <div class="form-actions">
+            <button
+              type="submit"
+              class="contact-submit-btn"
+              id="contactSubmitBtn"
+            >
+              <span>Enviar consulta</span>
+              <span class="btn-arrow" aria-hidden="true">
+                <LucideIcon icon={ArrowRight} size={15} strokeWidth={1.6} />
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact-section {
+    width: 100%;
+    position: relative;
+    background-color: var(--bg-page);
+    padding-top: var(--section-space-sm);
+    padding-bottom: var(--section-space-lg);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(3.5rem, 6vw, 6rem);
+      align-items: start;
+    }
+  }
+
+  /* ==========================================================================
+     Left Column: Editorial Message & Direct Channels
+     ========================================================================== */
+  .contact-editorial {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .contact-header {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-title {
+    font-size: clamp(2.35rem, 4.5vw, 3.85rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: var(--tracking-tightest);
+    color: var(--text-light-primary);
+    text-wrap: balance;
+  }
+
+  .contact-desc {
+    font-size: var(--text-body-lg);
+    line-height: var(--leading-relaxed);
+    color: var(--text-light-secondary);
+    max-width: 40ch;
+    text-wrap: pretty;
+    margin-top: 1rem;
+    margin-bottom: clamp(2rem, 3.5vw, 3rem);
+  }
+
+  /* Contact Channels List */
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-top: 1px solid var(--border-light-subtle);
+  }
+
+  .channel-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1.1rem;
+    border-bottom: 1px solid var(--border-light-subtle);
+    text-decoration: none;
+    color: var(--text-light-primary);
+    transition: opacity var(--duration-quick) var(--ease-default);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .channel-row:hover {
+      opacity: 0.7;
+    }
+
+    .channel-row:hover .channel-arrow {
+      transform: translateX(3px);
+    }
+  }
+
+  .channel-identity {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .channel-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light-secondary);
+    opacity: 0.75;
+    flex-shrink: 0;
+    transition:
+      opacity var(--duration-quick) var(--ease-default),
+      color var(--duration-quick) var(--ease-default);
+  }
+
+  .channel-row:hover .channel-icon-wrap {
+    opacity: 1;
+    color: var(--text-light-primary);
+  }
+
+  .channel-name {
+    font-size: var(--text-body-sm);
+    font-weight: 500;
+    color: var(--text-light-secondary);
+    transition: color var(--duration-quick) var(--ease-default);
+  }
+
+  .channel-row:hover .channel-name {
+    color: var(--text-light-primary);
+  }
+
+  .channel-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    color: var(--text-light-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .channel-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--duration-quick) var(--ease-default);
+  }
+
+  /* ==========================================================================
+     Right Column: Clean Editorial Form
+     ========================================================================== */
+  .contact-form-card {
+    width: 100%;
+    background-color: var(--bg-canvas-light);
+    border: 1px solid var(--border-light-subtle);
+    border-radius: var(--canvas-radius);
+    padding: clamp(1.5rem, 3.2vw, 2.75rem);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+  }
+
+  .form-row-duo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  @media (max-width: 640px) {
+    .form-row-duo {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+  }
+
+  .field-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-light-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .required-mark {
+    color: var(--text-light-secondary);
+    font-weight: 400;
+  }
+
+  .optional-mark {
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--text-light-secondary);
+  }
+
+  .field-input {
+    width: 100%;
+    height: 48px;
+    padding-inline: 1rem;
+    font-family: inherit;
+    font-size: 0.9375rem;
+    color: var(--text-light-primary);
+    background-color: #ffffff;
+    border: 1px solid var(--border-light-subtle);
+    border-radius: 10px;
+    transition:
+      border-color var(--duration-quick) var(--ease-default),
+      box-shadow var(--duration-quick) var(--ease-default);
+  }
+
+  .field-input::placeholder {
+    color: rgba(10, 10, 10, 0.38);
+    font-weight: 400;
+  }
+
+  .field-input:focus {
+    outline: none;
+    border-color: var(--text-light-primary);
+    box-shadow: 0 0 0 1px var(--text-light-primary);
+  }
+
+  .field-textarea {
+    height: auto;
+    min-height: 110px;
+    padding-block: 0.75rem;
+    resize: vertical;
+    line-height: 1.5;
+  }
+
+  /* Actions & Submission Button */
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.35rem;
+  }
+
+  .contact-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.65rem;
+    height: 48px;
+    padding-inline: 1.85rem;
+    border-radius: var(--pill-radius);
+    background-color: var(--text-light-primary);
+    color: #ffffff;
+    font-size: var(--text-body-sm);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    border: none;
+    cursor: pointer;
+    transition:
+      transform var(--duration-smooth) var(--ease-default),
+      background-color var(--duration-smooth) var(--ease-default);
+    align-self: flex-start;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .contact-submit-btn:hover {
+      background-color: #232730;
+      transform: translateY(-1px);
+    }
+
+    .contact-submit-btn:hover .btn-arrow {
+      transform: translateX(3px);
+    }
+  }
+
+  .contact-submit-btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--duration-quick) var(--ease-default);
+  }
+
+  @media (max-width: 768px) {
+    .contact-submit-btn {
+      width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-submit-btn,
+    .btn-arrow,
+    .channel-arrow,
+    .channel-row,
+    .field-input {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>

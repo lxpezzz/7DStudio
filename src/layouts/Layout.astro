@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import siteData from "../data/site.json";
+import CookieConsent from "../components/CookieConsent.astro";
 
 interface Props {
   title?: string;
@@ -46,6 +47,8 @@ const { title = siteData.title, description = siteData.description } =
     <div class="page-wrapper">
       <slot />
     </div>
+
+    <CookieConsent />
 
     <script>
       import { initApp } from "../scripts/animations";

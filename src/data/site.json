@@ -25,12 +25,12 @@
     },
     {
       "label": "Contacto",
-      "href": "#contacto"
+      "href": "/#contacto"
     }
   ],
   "cta": {
     "label": "Hablemos",
-    "href": "#contacto"
+    "href": "/#contacto"
   },
   "hero": {
     "titleLine1": "Webs hechas",
@@ -45,6 +45,6 @@
     "title": "¿Creamos algo que destaque?",
     "description": "Desde una página web hasta una solución digital completa para conectar tu negocio con tus clientes.",
     "buttonLabel": "Hablar del proyecto",
-    "buttonHref": "#contacto"
+    "buttonHref": "/#contacto"
   }
 }

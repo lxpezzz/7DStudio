@@ -2,7 +2,10 @@ import { gsap } from "../gsap";
 import { prefersReducedMotion } from "../motion";
 
 export function initDemosAnimation() {
-  const section = document.getElementById("prototipos");
+  const section =
+    document.getElementById("demos") ||
+    document.getElementById("prototipos") ||
+    document.querySelector(".prototypes-section");
   if (!section) return;
 
   const header = section.querySelector(".prototypes-header");
@@ -36,13 +39,13 @@ export function initDemosAnimation() {
   if (cards.length > 0) {
     gsap.fromTo(
       cards,
-      { opacity: 0, y: 40, scale: 0.98 },
+      { opacity: 0, y: 36, scale: 0.985 },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        duration: 0.85,
-        stagger: 0.15,
+        duration: 0.8,
+        stagger: 0.12,
         ease: "power2.out",
         scrollTrigger: {
           trigger: section.querySelector(".demos-grid") || section,

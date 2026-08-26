@@ -1,0 +1,354 @@
+---
+const currentYear = new Date().getFullYear();
+
+const navSections = [
+  {
+    title: "Servicios",
+    links: [
+      { label: "Diseño web", href: "#precios" },
+      { label: "Landing pages", href: "#precios" },
+    ],
+  },
+  {
+    title: "Productos",
+    links: [
+      { label: "Expositores QR", href: "#productos" },
+      { label: "Tarjetas NFC", href: "#productos" },
+      { label: "Tarjetas QR", href: "#productos" },
+      { label: "Productos personalizados", href: "/#contacto" },
+    ],
+  },
+  {
+    title: "Empresa",
+    links: [
+      { label: "Cómo trabajamos", href: "#proceso" },
+      { label: "Preguntas frecuentes", href: "#FAQ" },
+    ],
+  },
+  {
+    title: "Contacto",
+    links: [
+      {
+        label: "WhatsApp",
+        href: "https://wa.me/34600000000",
+        external: true,
+      },
+      {
+        label: "Email",
+        href: "mailto:hola@7dstudio.es",
+      },
+      {
+        label: "Instagram",
+        href: "https://instagram.com/7dstudio",
+        external: true,
+      },
+    ],
+  },
+];
+
+const legalLinks = [
+  { label: "Política de privacidad", href: "/politica-de-privacidad" },
+  { label: "Aviso legal", href: "/aviso-legal" },
+  { label: "Política de cookies", href: "/politica-de-cookies" },
+];
+---
+
+<footer class="studio-footer" data-header-theme="dark">
+  <div class="section-container">
+    <!-- Main Row: Brand Column + 4 Navigation Columns -->
+    <div class="footer-grid">
+      <!-- Left Column: Brand & Claim -->
+      <div class="footer-brand-col">
+        <a href="/" class="footer-brand" aria-label="7DStudio - Inicio">
+          <img
+            src="/images/7dstudio-logo.svg"
+            alt="7DStudio"
+            class="footer-logo"
+            width="110"
+            height="32"
+          />
+        </a>
+        <p class="footer-claim">
+          Diseño digital y productos que conectan tu negocio con tus clientes.
+        </p>
+      </div>
+
+      <!-- Right Navigation Columns -->
+      {
+        navSections.map((section) => (
+          <div class="footer-col">
+            <h3 class="footer-col-title">{section.title}</h3>
+            <ul class="footer-links">
+              {section.links.map((link) => (
+                <li>
+                  <a
+                    href={link.href}
+                    class="footer-link"
+                    {...(link.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Fine Hairline Divider -->
+    <div class="footer-divider" aria-hidden="true"></div>
+
+    <!-- Bottom Row: Copyright & Legal Links -->
+    <div class="footer-bottom">
+      <p class="footer-copy">
+        © {currentYear} 7DStudio. Todos los derechos reservados.
+      </p>
+
+      <nav class="footer-legal" aria-label="Enlaces legales">
+        <ul class="footer-legal-list">
+          {
+            legalLinks.map((link) => (
+              <li>
+                <a href={link.href} class="footer-legal-link">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+          <li>
+            <button
+              type="button"
+              class="footer-legal-link footer-legal-btn"
+              data-open-cookie-settings
+            >
+              Configurar cookies
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .studio-footer {
+    width: 100%;
+    position: relative;
+    background-color: var(--bg-page);
+    padding-top: clamp(3rem, 5vw, 4.5rem);
+    padding-bottom: clamp(2rem, 3.5vw, 3rem);
+  }
+
+  /* Main Grid Layout */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: clamp(2rem, 3.5vw, 4rem);
+    align-items: start;
+    width: 100%;
+  }
+
+  /* Brand Column */
+  .footer-brand-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-brand {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    text-decoration: none;
+    transition: opacity var(--duration-quick) var(--ease-default);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .footer-brand:hover {
+      opacity: 0.75;
+    }
+  }
+
+  .footer-brand:focus-visible {
+    outline: 2px solid var(--text-light-primary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .footer-logo {
+    display: block;
+    width: auto;
+    height: 30px;
+    max-width: 110px;
+    object-fit: contain;
+  }
+
+  .footer-claim {
+    font-size: var(--text-body-sm);
+    line-height: var(--leading-relaxed);
+    color: var(--text-light-secondary);
+    max-width: 28ch;
+    margin-top: 1.15rem;
+    text-wrap: pretty;
+  }
+
+  /* Navigation Columns */
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer-col-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text-light-primary);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .footer-link {
+    font-size: var(--text-body-sm);
+    color: var(--text-light-secondary);
+    text-decoration: none;
+    display: inline-block;
+    width: fit-content;
+    padding-block: 0.1rem;
+    transition:
+      color var(--duration-quick) var(--ease-default),
+      transform var(--duration-quick) var(--ease-default);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .footer-link:hover {
+      color: var(--text-light-primary);
+      transform: translateX(2px);
+    }
+  }
+
+  .footer-link:focus-visible {
+    outline: 2px solid var(--text-light-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Divider */
+  .footer-divider {
+    width: 100%;
+    height: 1px;
+    background-color: var(--border-light-subtle);
+    margin-top: clamp(2.5rem, 4.5vw, 4rem);
+    margin-bottom: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  /* Bottom Row: Metadata & Legal */
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    font-size: var(--text-caption);
+    color: var(--text-light-secondary);
+    letter-spacing: -0.01em;
+  }
+
+  .footer-copy {
+    color: var(--text-light-secondary);
+    margin: 0;
+  }
+
+  .footer-legal-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 2vw, 1.5rem);
+    flex-wrap: wrap;
+  }
+
+  .footer-legal-link {
+    color: var(--text-light-secondary);
+    text-decoration: none;
+    transition: color var(--duration-quick) var(--ease-default);
+    display: inline-block;
+    padding-block: 0.1rem;
+  }
+
+  .footer-legal-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.1rem 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .footer-legal-link:hover {
+      color: var(--text-light-primary);
+    }
+  }
+
+  .footer-legal-link:focus-visible {
+    outline: 2px solid var(--text-light-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem 2rem;
+    }
+
+    .footer-brand-col {
+      grid-column: 1 / -1;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem 1.5rem;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .footer-legal-list {
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-brand,
+    .footer-link,
+    .footer-legal-link {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+</style>
